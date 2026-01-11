@@ -18,6 +18,9 @@
   --font-size-overlay: 1.15em;
   --font-size-card-link: 1.25em;
 }
+body {
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+}
 .delorean-hero-btn {
   background-color: var(--color-blue);
   color: var(--color-black);
