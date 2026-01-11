@@ -31,6 +31,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
   .delorean-hero-overlay {
     min-width: 320px;
     min-height: 260px;
