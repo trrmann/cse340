@@ -1,6 +1,361 @@
+.delorean-hero-btn {
+  background-color: #90cdf4;
+  color: #000;
+  padding: 0.5em;
+}
+.delorean-hero-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+}
+.delorean-hero-image-wrapper {
+    border: none !important;
+  position: relative;
+  width: 100%;
+  max-width: none;
+  width: 100%;
+  margin: 0 auto;
+}
+.delorean-hero-img {
+    border: none !important;
+    box-shadow: none !important;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  /* border-radius and box-shadow removed to eliminate border around hero image */
+  margin: 0 auto;
+}
+.flux-capacitor-card-outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0;
+  margin-top: 0;
+  width: 220px;
+}
+.flame-decals-card-outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0;
+  width: 220px;
+}
+.bumper-stickers-card-outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0;
+  width: 220px;
+}
+.hub-caps-card-outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0;
+  width: 220px;
+}
+.flux-capacitor-card {
+  background: #90cdf4;
+  border-radius: 0;
+  border: 1px solid #222;
+  box-shadow: 0 1px 2px #222 inset;
+  width: 220px;
+  height: 100px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.flame-decals-card {
+  background: #90cdf4;
+  border-radius: 0;
+  border: 1px solid #222;
+  box-shadow: 0 1px 2px #222 inset;
+  width: 220px;
+  height: 100px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.bumper-stickers-card {
+  background: #90cdf4;
+  border-radius: 0;
+  border: 1px solid #222;
+  box-shadow: 0 1px 2px #222 inset;
+  width: 220px;
+  height: 100px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hub-caps-card {
+  background: #90cdf4;
+  border-radius: 0;
+  border: 1px solid #222;
+  box-shadow: 0 1px 2px #222 inset;
+  width: 220px;
+  height: 100px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.flux-capacitor-card-link {
+  margin-top: 8px;
+  font-size: 1.25em;
+  font-weight: bold;
+  color: #2563eb;
+}
+.flame-decals-card-link {
+  margin-top: 8px;
+  font-size: 1.25em;
+  font-weight: bold;
+  color: #2563eb;
+}
+.bumper-stickers-card-link {
+  margin-top: 8px;
+  font-size: 1.25em;
+  font-weight: bold;
+  color: #2563eb;
+}
+.hub-caps-card-link {
+  margin-top: 8px;
+  font-size: 1.25em;
+  font-weight: bold;
+  color: #2563eb;
+}
+.delorean-hero-overlay {
+  color: #3793c7;
+  font-size: 1.15em;
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+    background: rgba(255,255,255,0.7);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    padding: 0 34px 27px 34px; /* top padding removed for minimal space */
+    margin-top: 0;
+  min-width: 260px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.delorean-hero-overlay h1,
+.delorean-hero-overlay h2,
+.delorean-hero-overlay h3,
+.delorean-hero-overlay h4,
+.delorean-hero-overlay h5,
+.delorean-hero-overlay h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.delorean-hero-overlay ul,
+.delorean-hero-overlay ol {
+  margin-top: 0;
+  list-style-type: none;
+  text-align: left;
+}
+.delorean-hero-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+}
+.delorean-hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+/* ...existing code... */
+.delorian-upgrades-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 40px;
+}
+.delorean-hero-container {
+}
+.flame-decals-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 0;
+  margin-top: 0;
+  display: block;
+}
+.flux-capacitor-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 0;
+  margin-top: 0;
+  display: block;
+}
+.delorean-sections-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 40px;
+  margin: 32px 0;
+  align-items: start;
+  margin-top: 32px;
+}
+.delorean-reviews-list {
+  margin: 0;
+  padding: 0 0 0 24px;
+  list-style-type: disc;
+  height: 243px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.delorean-reviews-list-container {
+  display: flex;
+  align-items: flex-start;
+}
+.delorean-reviews-section {
+  flex: 1;
+  padding: 24px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.delorian-upgrades-section {
+  flex: 1;
+  padding: 24px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.body-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.site-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+/* Main content area */
+.main-content {
+  flex: 1;
+}
+/* Spacer div for layout */
+.spacer-div {
+  height: 16px;
+  visibility: hidden;
+}
+html, body {
+  height: 100%;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.site-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+footer {
+  margin-top: auto;
+  margin-bottom: 0;
+}
+nav ul li {
+  color: #fff;
+  font-size: 1.5em;
+  margin: 12px 0;
+}
+nav {
+  background: #000;
+}
+nav ul {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+/* Remove bullets from navigation */
+nav ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+/* Header layout with flexbox */
+#top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  min-height: 80px;
+}
+.siteName {
+  font-size: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+#tools {
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+/* Header font size adjustments */
+.siteName {
+  font-size: 3em;
+}
+#tools {
+  font-size: 1.5em;
+}
+/* Remove hyperlink look from header anchors */
+#top-header a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: normal;
+  cursor: pointer;
+}
+/* Main site container styling */
+.site-container {
+  background: #fff;
+  border: 5px solid #90cdf4;
+  border-radius: 18px;
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.08), /* soft shadow */
+    0 0 0 5px #e3f2fd inset,    /* inner highlight for 3D effect */
+    0 0 12px 2px #90cdf4 inset; /* blue glow for rounded look */
+  min-height: auto;
+  margin: 16px 80px 8px 80px;
+  max-width: 1100px;
+  padding: 32px 24px 0 24px;
+}
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+body {
+  background-image: url("../images/site/checkerboard.jpg");
+  background-repeat: repeat;
+  background-size: 450px 450px;
 }

@@ -2,16 +2,17 @@
 <html lang="en">
 <%- include('../partials/head') %>
 
-<body>
-    <div id="wrapper">
-    <%- include('../partials/header') %>
-    <%- include('../partials/navigation') %>
+<body class="body-layout">
+    <div id="wrapper" class="site-container">
+        <%- include('../partials/header') %>
+        <%- include('../partials/navigation') %>
 
-        <main>
+        <main class="main-content">
             <%- body %>
         </main>
 
-    <%- include('../partials/footer') %>
+        <%- include('../partials/footer') %>
     </div>
+    <div class="spacer-div">&nbsp;</div>
 </body>
 </html>
