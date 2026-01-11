@@ -24,20 +24,18 @@ body {
     padding: 40px 32px 0 32px;
     border: 6px solid var(--color-blue) !important;
     border-radius: 18px !important;
-    box-shadow: 0 2px 8px var(--color-shadow) !important, 0 0 0 5px var(--color-shadow-inner) inset !important, 0 0 12px 2px var(--color-shadow-glow) inset !important;
+    box-shadow: 0 2px 8px var(--color-shadow), 0 0 0 5px var(--color-shadow-inner) inset, 0 0 12px 2px var(--color-shadow-glow) inset !important;
   }
 #tools {
   font-size: var(--font-size-large);
   display: flex;
   align-items: center;
   justify-content: flex-end;
-/* ...existing code... */
   .delorean-hero-overlay {
     min-width: 320px;
     min-height: 260px;
     font-size: calc(var(--font-size-overlay) * 1.1);
   }
-  /* ...existing code... */
 }
 
 @media (min-width: 1024px) and (max-width: 1440px) {
