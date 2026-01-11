@@ -58,19 +58,6 @@ body {
     width: 100%;
     box-sizing: border-box;
   }
-
-  .delorian-upgrades-section {
-    grid-column: 1;
-    order: 1;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .delorean-reviews-section {
-    grid-column: 2;
-    order: 2;
-    width: 100%;
-    box-sizing: border-box;
-  }
 /* Ensure each section takes up half the width */
 /* ...existing code... */
   .delorian-upgrades-grid {
@@ -100,24 +87,6 @@ body {
     height: 120px;
     margin: 0 auto;
     box-sizing: border-box;
-  }
-  .flux-capacitor-card-outer,
-  .flame-decals-card-outer,
-  .bumper-stickers-card-outer,
-  .hub-caps-card-outer {
-    width: 100%;
-    max-width: 260px;
-    margin: 0 auto;
-  }
-  .flux-capacitor-card,
-  .flame-decals-card,
-  .bumper-stickers-card,
-  .hub-caps-card {
-    width: 100%;
-    min-width: 0;
-    max-width: 260px;
-    height: 120px;
-    margin: 0 auto;
   }
   .siteName {
     font-size: calc(var(--font-size-xlarge) * 1.1);
