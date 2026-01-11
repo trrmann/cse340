@@ -1,10 +1,10 @@
+/* Large screen overrides for screens wider than 1440px */
+@media (min-width: 1441px) {
 body {
   background-image: url("../images/site/checkerboard.jpg");
   background-repeat: repeat;
   background-size: 450px 450px;
 }
-/* Large screen overrides for screens wider than 1440px */
-@media (min-width: 1441px) {
   .site-container {
     margin: 32px 200px 16px 200px;
     max-width: 1600px;
@@ -16,6 +16,12 @@ body {
       0 0 0 5px var(--color-shadow-inner) inset !important,
       0 0 12px 2px var(--color-shadow-glow) inset !important;
   }
+#tools {
+  font-size: var(--font-size-large);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
   .delorean-hero-overlay {
     min-width: 400px;
     min-height: 320px;

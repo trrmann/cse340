@@ -193,7 +193,7 @@ nav ul {
 #tools {
   font-size: var(--font-size-large);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-end;
 }
 /* Header font size adjustments */
