@@ -1,3 +1,16 @@
+/* Make Delorean upgrade cards responsive in laptop view */
+.delorean-upgrades-section .upgrades-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.delorean-upgrades-section .upgrade-card {
+  flex: 1 1 220px;
+  min-width: 220px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 /* Laptop-specific overrides for screens between 1024px and 1440px */
 @media (min-width: 1024px) and (max-width: 1440px) {
 body {
@@ -11,26 +24,59 @@ body {
     padding: 40px 32px 0 32px;
     border: 6px solid var(--color-blue) !important;
     border-radius: 18px !important;
-    box-shadow:
-      0 2px 8px var(--color-shadow) !important,
-      0 0 0 5px var(--color-shadow-inner) inset !important,
-      0 0 12px 2px var(--color-shadow-glow) inset !important;
+    box-shadow: 0 2px 8px var(--color-shadow) !important, 0 0 0 5px var(--color-shadow-inner) inset !important, 0 0 12px 2px var(--color-shadow-glow) inset !important;
   }
 #tools {
   font-size: var(--font-size-large);
   display: flex;
   align-items: center;
   justify-content: flex-end;
-}
+/* ...existing code... */
   .delorean-hero-overlay {
     min-width: 320px;
     min-height: 260px;
     font-size: calc(var(--font-size-overlay) * 1.1);
   }
+  /* ...existing code... */
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
   .delorean-sections-container {
-    gap: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
     margin: 40px 0;
+    align-items: start;
   }
+  .delorian-upgrades-section {
+    grid-column: 1;
+    order: 1;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .delorean-reviews-section {
+    grid-column: 2;
+    order: 2;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .delorian-upgrades-section {
+    grid-column: 1;
+    order: 1;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .delorean-reviews-section {
+    grid-column: 2;
+    order: 2;
+    width: 100%;
+    box-sizing: border-box;
+  }
+/* Ensure each section takes up half the width */
+/* ...existing code... */
   .delorian-upgrades-grid {
     gap: 60px;
   }

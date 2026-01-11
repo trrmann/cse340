@@ -27,9 +27,21 @@ body {
     min-height: 320px;
     font-size: calc(var(--font-size-overlay) * 1.2);
   }
-  .delorean-sections-container {
-    gap: 80px;
-    margin: 56px 0;
+.delorean-sections-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 80px;
+  margin: 56px 0;
+  align-items: start;
+}
+  .delorian-upgrades-section {
+    grid-column: 1;
+    order: 1;
+  }
+  .delorean-reviews-section {
+    grid-column: 2;
+    order: 2;
   }
   .delorian-upgrades-grid {
     gap: 80px;
