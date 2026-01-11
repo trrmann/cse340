@@ -11,11 +11,10 @@
   margin-top: 32px;
 }
 .delorean-hero-image-wrapper {
-    border: none !important;
+  border: none !important;
   position: relative;
   width: 100%;
   max-width: none;
-  width: 100%;
   margin: 0 auto;
 }
 .delorean-hero-img {
@@ -138,7 +137,7 @@
   font-size: 1.15em;
   position: absolute;
   top: 50%;
-  left: 10%;
+  left: 20%;
   transform: translate(-50%, -50%);
     background: rgba(255,255,255,0.7);
   border-radius: 16px;
@@ -168,27 +167,11 @@
   list-style-type: none;
   text-align: left;
 }
-.delorean-hero-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 32px;
-}
-.delorean-hero-image-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
-}
-/* ...existing code... */
 .delorian-upgrades-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 40px;
-}
-.delorean-hero-container {
 }
 .flame-decals-img {
   width: 80px;
@@ -243,28 +226,6 @@
   justify-content: flex-start;
 }
 .body-layout {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-.site-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-/* Main content area */
-.main-content {
-  flex: 1;
-}
-/* Spacer div for layout */
-.spacer-div {
-  height: 16px;
-  visibility: hidden;
-}
-html, body {
-  height: 100%;
-}
-body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
