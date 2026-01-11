@@ -1,0 +1,39 @@
+/* Laptop-specific overrides for screens between 1024px and 1440px */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .site-container {
+    margin: 24px 120px 12px 120px;
+    max-width: 1300px;
+    padding: 40px 32px 0 32px;
+  }
+  .delorean-hero-overlay {
+    min-width: 320px;
+    min-height: 260px;
+    font-size: calc(var(--font-size-overlay) * 1.1);
+  }
+  .delorean-sections-container {
+    gap: 60px;
+    margin: 40px 0;
+  }
+  .delorian-upgrades-grid {
+    gap: 60px;
+  }
+  .flux-capacitor-card-outer,
+  .flame-decals-card-outer,
+  .bumper-stickers-card-outer,
+  .hub-caps-card-outer {
+    width: 260px;
+  }
+  .flux-capacitor-card,
+  .flame-decals-card,
+  .bumper-stickers-card,
+  .hub-caps-card {
+    width: 260px;
+    height: 120px;
+  }
+  .siteName {
+    font-size: calc(var(--font-size-xlarge) * 1.1);
+  }
+  #tools {
+    font-size: calc(var(--font-size-large) * 1.1);
+  }
+}

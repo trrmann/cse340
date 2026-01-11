@@ -1,0 +1,39 @@
+/* Large screen overrides for screens wider than 1440px */
+@media (min-width: 1441px) {
+  .site-container {
+    margin: 32px 200px 16px 200px;
+    max-width: 1600px;
+    padding: 56px 48px 0 48px;
+  }
+  .delorean-hero-overlay {
+    min-width: 400px;
+    min-height: 320px;
+    font-size: calc(var(--font-size-overlay) * 1.2);
+  }
+  .delorean-sections-container {
+    gap: 80px;
+    margin: 56px 0;
+  }
+  .delorian-upgrades-grid {
+    gap: 80px;
+  }
+  .flux-capacitor-card-outer,
+  .flame-decals-card-outer,
+  .bumper-stickers-card-outer,
+  .hub-caps-card-outer {
+    width: 320px;
+  }
+  .flux-capacitor-card,
+  .flame-decals-card,
+  .bumper-stickers-card,
+  .hub-caps-card {
+    width: 320px;
+    height: 160px;
+  }
+  .siteName {
+    font-size: calc(var(--font-size-xlarge) * 1.2);
+  }
+  #tools {
+    font-size: calc(var(--font-size-large) * 1.2);
+  }
+}

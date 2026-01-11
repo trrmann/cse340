@@ -5,7 +5,7 @@
   --color-blue-link: #143a6c; /* darkened for card links */
   --color-border: #222;
   --color-bg: #fff;
-  --color-shadow: rgba(0,0,0,0.08);
+  /* Desktop/tablet styles for screens wider than 600px */
   --color-shadow-overlay: rgba(0,0,0,0.18);
   --color-shadow-glow: #90cdf4;
   --color-shadow-inner: #e3f2fd;
