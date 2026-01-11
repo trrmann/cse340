@@ -187,6 +187,7 @@ nav ul {
   padding: 0 24px;
   min-height: 80px;
 }
+/* Header layout and font size */
 .siteName {
   font-size: var(--font-size-xlarge);
   display: flex;
@@ -198,13 +199,6 @@ nav ul {
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
-}
-/* Header font size adjustments */
-.siteName {
-  font-size: 3em;
-}
-#tools {
-  font-size: 1.5em;
 }
 /* Remove hyperlink look from header anchors */
 #top-header a {
