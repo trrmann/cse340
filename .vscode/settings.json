@@ -1,0 +1,32 @@
+{
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": true
+                }
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "dpg-d5du2vq4d50c73fg8hbg-a.virginia-postgres.render.com",
+            "port": 5432,
+            "sshOptions": {
+                "port": 22
+            },
+            "driver": "PostgreSQL",
+            "name": "render postgres 18",
+            "database": "cse340tm_plvn",
+            "username": "cse340tm"
+        },
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "localhost postgres 18",
+            "database": "postgres",
+            "username": "postgres"
+        }
+    ]
+}
