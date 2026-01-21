@@ -17,7 +17,7 @@ foreach ($step in $steps) {
         Start-Process powershell.exe -ArgumentList "-Command", "& '$startScript'" -WindowStyle Normal
         Write-Host "Development server started in a new window. Close that window to stop the server."
         # Open the default browser to the local dev server URL
-        $devUrl = "http://localhost:5173/"
+        $devUrl = "http://localhost:5500/"
         Start-Process $devUrl
     }
     else {
