@@ -3,6 +3,7 @@
 ## 1. Remove and Recreate the Database on Render
 
 ### Remove the Database
+
 1. Log in to your Render dashboard (https://dashboard.render.com).
 2. Navigate to your PostgreSQL database service.
 3. Click on the database you want to remove.
@@ -11,6 +12,7 @@
    - Warning: This will permanently delete all data in the database.
 
 ### Recreate the Database
+
 1. In Render, go to the "Databases" section.
 2. Click "Create a New Database."
 3. Enter a name, select PostgreSQL, and configure options as needed.
@@ -20,8 +22,6 @@
 ## 2. Configure pgAdmin 4 to Connect to Render PostgreSQL
 
 https://dashboard.render.com/d/dpg-d5kldv6r433s73euht7g-ahttps://dashboard.render.com/d/dpg-d5kldv6r433s73euht7g-aQQ
-
-
 
 1. Download and install pgAdmin 4 (https://www.pgadmin.org/download/).
 2. Open pgAdmin 4 and log in.
