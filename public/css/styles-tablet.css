@@ -1,17 +1,17 @@
 /* Tablet-specific overrides for screens between 600px and 1023px */
 @media (min-width: 600px) and (max-width: 1023px) {
-  .site-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-  }
-  #tools {
-    font-size: var(--font-size-large);
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
+.site-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+#tools {
+  font-size: var(--font-size-large);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
   .delorean-hero-overlay {
     min-width: 220px;
     min-height: 180px;
