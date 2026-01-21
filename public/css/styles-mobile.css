@@ -6,7 +6,7 @@
   --color-border: #222;
   --color-bg: #fff;
   /* Desktop/tablet styles for screens wider than 600px */
-  --color-shadow-overlay: rgba(0, 0, 0, 0.18);
+  --color-shadow-overlay: rgba(0,0,0,0.18);
   --color-shadow-glow: #90cdf4;
   --color-shadow-inner: #e3f2fd;
   --color-black: #000;
@@ -19,8 +19,7 @@
   --font-size-card-link: 1.25em;
 }
 body {
-  font-family:
-    'Segoe UI', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
 }
 .delorean-hero-btn {
   background-color: var(--color-blue);
@@ -43,8 +42,8 @@ body {
   margin: 0 auto;
 }
 .delorean-hero-img {
-  border: none !important;
-  box-shadow: none !important;
+    border: none !important;
+    box-shadow: none !important;
   width: 100%;
   max-width: 100%;
   height: auto;
@@ -59,12 +58,7 @@ body {
   top: 50%;
   left: 20%;
   transform: translate(-50%, -50%);
-  background: rgba(
-    255,
-    255,
-    255,
-    0.85
-  ); /* increased opacity for better contrast */
+  background: rgba(255,255,255,0.85); /* increased opacity for better contrast */
   border-radius: 16px;
   box-shadow: 0 4px 24px var(--color-shadow-overlay);
   padding: 0 34px 27px 34px; /* top padding removed for minimal space */
@@ -114,13 +108,13 @@ body {
   margin-top: 0;
   display: block;
 }
-.delorean-sections-container {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  margin: 24px 0 0 0;
-  align-items: stretch;
-}
+  .delorean-sections-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 24px 0 0 0;
+    align-items: stretch;
+  }
 .delorean-reviews-list {
   margin: 0;
   padding: 0 0 0 24px;
