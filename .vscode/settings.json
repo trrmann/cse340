@@ -1,4 +1,7 @@
 {
+    "git.autofetch": true,
+    "git.autofetchPeriod": 180,
+    "git.confirmSync": false,
     "sqltools.connections": [
         {
             "pgOptions": {
