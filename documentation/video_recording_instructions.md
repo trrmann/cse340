@@ -1,4 +1,3 @@
-
 # How to Record and Upload a Database Process Video (Windows)
 
 ## 1. Prepare Your Presentation Slides as a Teleprompter
