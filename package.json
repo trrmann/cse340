@@ -14,14 +14,12 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "ejs": "^3.1.10",
-    "eslint": "^8.56.0",
     "express": "^4.18.2",
     "express-ejs-layouts": "^2.5.1",
-    "lint": "^0.8.19",
-    "pg": "^8.8.0",
-    "pnpm": "^10.28.1"
+    "pg": "^8.8.0"
   },
   "devDependencies": {
+    "eslint": "^8.56.0",
     "nodemon": "^3.1.0",
     "prettier": "^3.2.5"
   }
