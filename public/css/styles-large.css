@@ -65,4 +65,43 @@
   #tools {
     font-size: calc(var(--font-size-large) * 1.2);
   }
+
+  /* Inventory Display - Large View */
+  #inv-display {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin: 40px 0;
+  }
+
+  #inv-display li {
+    padding: 28px;
+  }
+
+  #inv-display li:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  #inv-display img {
+    margin-bottom: 16px;
+  }
+
+  .namePrice {
+    margin-top: 16px;
+  }
+
+  .namePrice h2 {
+    font-size: calc(var(--font-size-large) * 1.3);
+    margin: 12px 0;
+  }
+
+  .namePrice span {
+    font-size: calc(var(--font-size-large) * 1.3);
+  }
+
+  .notice {
+    padding: 28px;
+    margin: 40px 0;
+    font-size: calc(var(--font-size-base) * 1.3);
+  }
 }

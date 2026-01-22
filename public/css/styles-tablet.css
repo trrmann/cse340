@@ -52,4 +52,29 @@
   #tools {
     font-size: calc(var(--font-size-large) * 0.95);
   }
+
+  /* Inventory Display - Tablet View */
+  #inv-display {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin: 24px 0;
+  }
+
+  #inv-display li {
+    padding: 20px;
+  }
+
+  .namePrice h2 {
+    font-size: calc(var(--font-size-large) * 1.1);
+  }
+
+  .namePrice span {
+    font-size: calc(var(--font-size-large) * 1.1);
+  }
+
+  .notice {
+    padding: 20px;
+    margin: 24px 0;
+    font-size: calc(var(--font-size-base) * 1.1);
+  }
 }

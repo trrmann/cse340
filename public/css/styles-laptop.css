@@ -97,4 +97,37 @@
   #tools {
     font-size: calc(var(--font-size-large) * 1.1);
   }
+
+  /* Inventory Display - Laptop View */
+  #inv-display {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin: 32px 0;
+  }
+
+  #inv-display li {
+    padding: 24px;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
+  }
+
+  #inv-display li:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .namePrice h2 {
+    font-size: calc(var(--font-size-large) * 1.2);
+  }
+
+  .namePrice span {
+    font-size: calc(var(--font-size-large) * 1.2);
+  }
+
+  .notice {
+    padding: 24px;
+    margin: 32px 0;
+    font-size: calc(var(--font-size-base) * 1.2);
+  }
 }
