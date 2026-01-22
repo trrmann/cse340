@@ -13,8 +13,8 @@ foreach ($step in $steps) {
     $scriptPath = Join-Path $PSScriptRoot $step.Script
     if ($step.Name -eq "Start") {
         Write-Host "Starting development server in a new PowerShell window..."
-        $startScript = Join-Path $PSScriptRoot $step.Script
-        Start-Process powershell.exe -ArgumentList "-Command", "& '$startScript'" -WindowStyle Normal
+        $projectRoot = $PSScriptRoot | Split-Path -Parent
+        Start-Process powershell.exe -ArgumentList "-NoExit", "-Command", "cd '$projectRoot'; pnpm run dev" -WindowStyle Normal
         Write-Host "Development server started in a new window. Close that window to stop the server."
         # Open the default browser to the local dev server URL
         #$devUrl = "http://localhost:5173/"

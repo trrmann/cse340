@@ -12,8 +12,8 @@ Push-Location $projectRoot
 Write-Host "Starting development server..."
 
 
-Start-Process "pnpm" -ArgumentList @("run", "dev") -WindowStyle Normal
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$projectRoot'; pnpm run dev" -WindowStyle Normal
 
 Write-Host "Development server started in a new window."
-Write-Host "Check dev-server.log for output and errors if the window closes unexpectedly."
+Write-Host "The window will stay open to show any errors."
 Pop-Location

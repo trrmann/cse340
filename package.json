@@ -7,7 +7,9 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "lint": "eslint . --ext .js",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build": "pnpm install",
+    "preview": "pnpm start"
   },
   "author": "",
   "license": "ISC",
