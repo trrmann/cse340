@@ -102,9 +102,11 @@ Util.buildClassificationGrid = async function (data) {
       grid += vehicle.inv_make + ' ' + vehicle.inv_model;
       grid += '</h2>';
       grid +=
-        '<p class="vehicle-price"><span class="sr-only">Price: </span>$' +
+        '<div class="vehicle-price-wrapper"><span class="sr-only">Price: </span><data class="vehicle-price" value="' +
+        vehicle.inv_price +
+        '" aria-hidden="true">$' +
         new Intl.NumberFormat('en-US').format(vehicle.inv_price) +
-        '</p>';
+        '</data></div>';
       grid += '</div>';
       grid += '</a>';
       grid += '</li>';
@@ -178,9 +180,11 @@ Util.buildItemDetailGrid = async function (data) {
       vehicle.inv_model +
       '</h2>';
     grid +=
-      '<p class="detail-price"><span class="sr-only">Price: </span>$' +
+      '<div class="detail-price-wrapper"><span class="sr-only">Price: </span><data class="detail-price" value="' +
+      vehicle.inv_price +
+      '" aria-hidden="true">$' +
       new Intl.NumberFormat('en-US').format(vehicle.inv_price) +
-      '</p>';
+      '</data></div>';
     grid += '</div>';
     grid += '<div class="detail-description">';
     grid += '<p>' + vehicle.inv_description + '</p>';
