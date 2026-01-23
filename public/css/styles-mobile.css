@@ -25,6 +25,19 @@ body {
   color: #2d3748;
 }
 
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 /* Global Page Heading Styles */
 h1 {
   font-size: 2rem;
@@ -581,6 +594,7 @@ nav ul li a:hover {
 .detail-specs {
   display: grid;
   gap: 16px;
+  margin: 0;
 }
 
 .spec-item {
@@ -592,18 +606,22 @@ nav ul li a:hover {
   border-radius: 8px;
 }
 
-.spec-label {
+.spec-label,
+dt.spec-label {
   font-weight: 500;
   color: #2d3748;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin: 0;
 }
 
-.spec-value {
+.spec-value,
+dd.spec-value {
   font-weight: 500;
   color: var(--color-blue-link);
   font-size: 1.1rem;
+  margin: 0;
 }
 
 /* Legacy support */

@@ -102,7 +102,7 @@ Util.buildClassificationGrid = async function (data) {
       grid += vehicle.inv_make + ' ' + vehicle.inv_model;
       grid += '</h2>';
       grid +=
-        '<p class="vehicle-price" aria-label="Price">$' +
+        '<p class="vehicle-price"><span class="sr-only">Price: </span>$' +
         new Intl.NumberFormat('en-US').format(vehicle.inv_price) +
         '</p>';
       grid += '</div>';
@@ -178,26 +178,26 @@ Util.buildItemDetailGrid = async function (data) {
       vehicle.inv_model +
       '</h2>';
     grid +=
-      '<p class="detail-price" aria-label="Price">$' +
+      '<p class="detail-price"><span class="sr-only">Price: </span>$' +
       new Intl.NumberFormat('en-US').format(vehicle.inv_price) +
       '</p>';
     grid += '</div>';
     grid += '<div class="detail-description">';
     grid += '<p>' + vehicle.inv_description + '</p>';
     grid += '</div>';
-    grid += '<div class="detail-specs">';
+    grid += '<dl class="detail-specs">';
     grid += '<div class="spec-item">';
-    grid += '<span class="spec-label" role="text">Color</span>';
-    grid += '<span class="spec-value">' + vehicle.inv_color + '</span>';
+    grid += '<dt class="spec-label">Color</dt>';
+    grid += '<dd class="spec-value">' + vehicle.inv_color + '</dd>';
     grid += '</div>';
     grid += '<div class="spec-item">';
-    grid += '<span class="spec-label" role="text">Mileage</span>';
+    grid += '<dt class="spec-label">Mileage</dt>';
     grid +=
-      '<span class="spec-value">' +
+      '<dd class="spec-value">' +
       new Intl.NumberFormat('en-US').format(vehicle.inv_miles) +
-      ' miles</span>';
+      ' miles</dd>';
     grid += '</div>';
-    grid += '</div>';
+    grid += '</dl>';
     grid += '</div>';
     grid += '</div>';
   } else {
