@@ -78,4 +78,54 @@ Util.buildClassificationGrid = async function (data) {
   return grid;
 };
 
+/* ************************
+ * Build the item detail view HTML
+ ************************** */
+
+Util.buildItemDetailGrid = async function (data) {
+  let grid;
+  if (data && data.length > 0) {
+    const vehicle = data[0];
+    grid = '<div id="item-display">';
+    grid += '<div class="item-image">';
+    grid +=
+      '<img src="' +
+      vehicle.inv_image +
+      '" alt="Image of ' +
+      vehicle.inv_make +
+      ' ' +
+      vehicle.inv_model +
+      ' on CSE Motors" />';
+    grid += '</div>';
+    grid += '<div class="item-details">';
+    grid += '<h2>' + vehicle.inv_make + ' ' + vehicle.inv_model + '</h2>';
+    grid +=
+      '<p class="item-price">Price: $' +
+      new Intl.NumberFormat('en-US').format(vehicle.inv_price) +
+      '</p>';
+    grid += '<p class="item-description">' + vehicle.inv_description + '</p>';
+    grid +=
+      '<p class="item-color"><strong>Color:</strong> ' +
+      vehicle.inv_color +
+      '</p>';
+    grid +=
+      '<p class="item-miles"><strong>Miles:</strong> ' +
+      new Intl.NumberFormat('en-US').format(vehicle.inv_miles) +
+      '</p>';
+    grid += '</div>';
+    grid += '</div>';
+  } else {
+    grid = '<p class="notice">Sorry, no matching vehicle could be found.</p>';
+  }
+  return grid;
+};
+
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = (fn) => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch(next);
+
 module.exports = Util;

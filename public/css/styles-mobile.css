@@ -329,3 +329,51 @@ nav ul {
   font-size: var(--font-size-base);
   font-weight: bold;
 }
+
+/* Item Detail Display Styles */
+#item-display {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.item-image {
+  width: 100%;
+}
+
+.item-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item-details h2 {
+  font-size: var(--font-size-large);
+  margin: 0;
+  color: var(--color-blue-link);
+}
+
+.item-price {
+  font-size: var(--font-size-large);
+  font-weight: bold;
+  color: var(--color-black);
+  margin: 0;
+}
+
+.item-description {
+  line-height: 1.6;
+  margin: 8px 0;
+}
+
+.item-color,
+.item-miles {
+  margin: 4px 0;
+}

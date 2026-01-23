@@ -77,4 +77,29 @@
     margin: 24px 0;
     font-size: calc(var(--font-size-base) * 1.1);
   }
+
+  /* Item Detail Display - Tablet View */
+  #item-display {
+    flex-direction: row;
+    gap: 24px;
+    padding: 24px 0;
+  }
+
+  .item-image {
+    flex: 1;
+    max-width: 50%;
+  }
+
+  .item-details {
+    flex: 1;
+    gap: 16px;
+  }
+
+  .item-details h2 {
+    font-size: calc(var(--font-size-large) * 1.1);
+  }
+
+  .item-price {
+    font-size: calc(var(--font-size-large) * 1.1);
+  }
 }
