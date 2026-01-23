@@ -12,7 +12,6 @@ const app = express();
 const static = require('./routes/static');
 const baseController = require('./controllers/baseController');
 const inventoryRoute = require('./routes/inventoryRoute');
-const utilities = require('./utilities/');
 
 /* ***********************
  * View Engines and Templates
@@ -31,31 +30,24 @@ app.use('/inv', inventoryRoute);
 /*app.get("/", function(req, res){
   res.render("index", {title: "Home Changed Again with full Deploy"})
 })*/
-app.get('/', utilities.handleErrors(baseController.buildHome));
-// File not found route - must be last route in list
-app.use(async (req, res, next) => {
-  next({ status: 404, message: 'Sorry, we appear to have lost that page.' });
-});
+app.get('/', baseController.buildHome);
 
 /* ***********************
- * Express Error Handler
- * place after all other middleware
+ * Error Handling Middleware
  *************************/
-app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav();
-  console.error(`Error at: "${req.originalUrl}": ${err.message}`);
-  let message;
-  if (err.status == 404) {
-    message = err.message;
-  } else {
-    message = 'Oh no! There was a crash. Maybe try a different route?';
-  }
-  res.status(err.status || 500);
-  res.render('errors/error', {
-    title: err.status || 'Server Error',
-    message,
-    nav,
-  });
+// 404 handler
+app.use((req, res, next) => {
+  res
+    .status(404)
+    .send(
+      `<h1>404 - Not Found</h1><p>The page you are looking for does not exist.</p><p>Requested: ${req.url}</p>`
+    );
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+  console.error('Error:', err);
+  res.status(500).send(`<h1>500 - Server Error</h1><p>${err.message}</p>`);
 });
 
 /* ***********************
@@ -71,5 +63,3 @@ const host = process.env.HOST;
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`);
 });
-
-module.exports = app;
