@@ -46,18 +46,20 @@ Util.buildClassificationGrid = async function (data) {
       grid +=
         '<img src="' +
         vehicle.inv_thumbnail +
-        '" alt="Image of ' +
+        '" alt="' +
+        vehicle.inv_year +
+        ' ' +
         vehicle.inv_make +
         ' ' +
         vehicle.inv_model +
-        ' on CSE Motors" class="vehicle-image" />';
+        '" class="vehicle-image" />';
       grid += '</div>';
       grid += '<div class="vehicle-info">';
       grid += '<h2 class="vehicle-name">';
       grid += vehicle.inv_make + ' ' + vehicle.inv_model;
       grid += '</h2>';
       grid +=
-        '<p class="vehicle-price">$' +
+        '<p class="vehicle-price" aria-label="Price">$' +
         new Intl.NumberFormat('en-US').format(vehicle.inv_price) +
         '</p>';
       grid += '</div>';
@@ -85,11 +87,13 @@ Util.buildItemDetailGrid = async function (data) {
     grid +=
       '<img src="' +
       vehicle.inv_image +
-      '" alt="Image of ' +
+      '" alt="' +
+      vehicle.inv_year +
+      ' ' +
       vehicle.inv_make +
       ' ' +
       vehicle.inv_model +
-      ' on CSE Motors" class="detail-image" />';
+      '" class="detail-image" />';
     grid += '</div>';
     grid += '</div>';
     grid += '<div class="detail-info-section">';
@@ -103,7 +107,7 @@ Util.buildItemDetailGrid = async function (data) {
       vehicle.inv_model +
       '</h2>';
     grid +=
-      '<p class="detail-price">$' +
+      '<p class="detail-price" aria-label="Price">$' +
       new Intl.NumberFormat('en-US').format(vehicle.inv_price) +
       '</p>';
     grid += '</div>';

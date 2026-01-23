@@ -376,6 +376,16 @@ nav ul li a:hover {
   transition: color 0.3s ease;
 }
 
+/* Style h3 wrappers for upgrade card links */
+.flux-capacitor-card-outer h3,
+.flame-decals-card-outer h3,
+.bumper-stickers-card-outer h3,
+.hub-caps-card-outer h3 {
+  margin: 12px 0 0 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
 .flux-capacitor-card-link:hover,
 .flame-decals-card-link:hover,
 .bumper-stickers-card-link:hover,
