@@ -31,44 +31,37 @@ Util.getNav = async function (req, res, next) {
 Util.buildClassificationGrid = async function (data) {
   let grid;
   if (data.length > 0) {
-    grid = '<div id="inv-display">';
+    grid = '<ul id="inv-display">';
     data.forEach((vehicle) => {
-      grid += '<li>';
+      grid += '<li class="vehicle-card">';
       grid +=
         '<a href="../../inv/detail/' +
         vehicle.inv_id +
-        '" title="View ' +
+        '" class="vehicle-card-link" title="View ' +
         vehicle.inv_make +
         ' ' +
         vehicle.inv_model +
-        'details"><img src="' +
+        ' details">';
+      grid += '<div class="vehicle-image-wrapper">';
+      grid +=
+        '<img src="' +
         vehicle.inv_thumbnail +
         '" alt="Image of ' +
         vehicle.inv_make +
         ' ' +
         vehicle.inv_model +
-        ' on CSE Motors" /></a>';
-      grid += '<div class="namePrice">';
-      grid += '<hr />';
-      grid += '<h2>';
-      grid +=
-        '<a href="../../inv/detail/' +
-        vehicle.inv_id +
-        '" title="View ' +
-        vehicle.inv_make +
-        ' ' +
-        vehicle.inv_model +
-        ' details">' +
-        vehicle.inv_make +
-        ' ' +
-        vehicle.inv_model +
-        '</a>';
+        ' on CSE Motors" class="vehicle-image" />';
+      grid += '</div>';
+      grid += '<div class="vehicle-info">';
+      grid += '<h2 class="vehicle-name">';
+      grid += vehicle.inv_make + ' ' + vehicle.inv_model;
       grid += '</h2>';
       grid +=
-        '<span>$' +
+        '<p class="vehicle-price">$' +
         new Intl.NumberFormat('en-US').format(vehicle.inv_price) +
-        '</span>';
+        '</p>';
       grid += '</div>';
+      grid += '</a>';
       grid += '</li>';
     });
     grid += '</ul>';
@@ -86,8 +79,9 @@ Util.buildItemDetailGrid = async function (data) {
   let grid;
   if (data && data.length > 0) {
     const vehicle = data[0];
-    grid = '<div id="item-display">';
-    grid += '<div class="item-image">';
+    grid = '<div id="item-display" class="detail-container">';
+    grid += '<div class="detail-image-section">';
+    grid += '<div class="detail-image-wrapper">';
     grid +=
       '<img src="' +
       vehicle.inv_image +
@@ -95,11 +89,13 @@ Util.buildItemDetailGrid = async function (data) {
       vehicle.inv_make +
       ' ' +
       vehicle.inv_model +
-      ' on CSE Motors" />';
+      ' on CSE Motors" class="detail-image" />';
     grid += '</div>';
-    grid += '<div class="item-details">';
+    grid += '</div>';
+    grid += '<div class="detail-info-section">';
+    grid += '<div class="detail-header">';
     grid +=
-      '<h2>' +
+      '<h2 class="detail-title">' +
       vehicle.inv_year +
       ' ' +
       vehicle.inv_make +
@@ -107,18 +103,26 @@ Util.buildItemDetailGrid = async function (data) {
       vehicle.inv_model +
       '</h2>';
     grid +=
-      '<p class="item-price">Price: $' +
+      '<p class="detail-price">$' +
       new Intl.NumberFormat('en-US').format(vehicle.inv_price) +
       '</p>';
-    grid += '<p class="item-description">' + vehicle.inv_description + '</p>';
+    grid += '</div>';
+    grid += '<div class="detail-description">';
+    grid += '<p>' + vehicle.inv_description + '</p>';
+    grid += '</div>';
+    grid += '<div class="detail-specs">';
+    grid += '<div class="spec-item">';
+    grid += '<span class="spec-label">Color</span>';
+    grid += '<span class="spec-value">' + vehicle.inv_color + '</span>';
+    grid += '</div>';
+    grid += '<div class="spec-item">';
+    grid += '<span class="spec-label">Mileage</span>';
     grid +=
-      '<p class="item-color"><strong>Color:</strong> ' +
-      vehicle.inv_color +
-      '</p>';
-    grid +=
-      '<p class="item-miles"><strong>Miles:</strong> ' +
+      '<span class="spec-value">' +
       new Intl.NumberFormat('en-US').format(vehicle.inv_miles) +
-      '</p>';
+      ' miles</span>';
+    grid += '</div>';
+    grid += '</div>';
     grid += '</div>';
     grid += '</div>';
   } else {

@@ -12,6 +12,7 @@ const app = express();
 const static = require('./routes/static');
 const baseController = require('./controllers/baseController');
 const inventoryRoute = require('./routes/inventoryRoute');
+const errorRoute = require('./routes/errorRoute');
 const utilities = require('./utilities/');
 
 /* ***********************
@@ -27,6 +28,8 @@ app.set('layout', './layouts/layout'); // not at views root
 app.use(static);
 // Inventory routes
 app.use('/inv', inventoryRoute);
+// Error route for testing
+app.use('/error', errorRoute);
 // Index route
 /*app.get("/", function(req, res){
   res.render("index", {title: "Home Changed Again with full Deploy"})

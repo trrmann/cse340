@@ -105,6 +105,28 @@
     margin: 32px 0;
   }
 
+  .vehicle-card {
+    border-radius: 16px;
+  }
+
+  .vehicle-card:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+    transform: translateY(-6px);
+  }
+
+  .vehicle-info {
+    padding: 28px;
+  }
+
+  .vehicle-name {
+    font-size: 1.5rem;
+  }
+
+  .vehicle-price {
+    font-size: 1.625rem;
+  }
+
+  /* Legacy support */
   #inv-display li {
     padding: 24px;
     transition:
@@ -138,6 +160,58 @@
     padding: 32px 0;
   }
 
+  .detail-container {
+    border-radius: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .detail-info-section {
+    padding: 40px 36px;
+  }
+
+  .detail-header {
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+  }
+
+  .detail-title {
+    font-size: 2.25rem;
+  }
+
+  .detail-price {
+    font-size: 2.5rem;
+  }
+
+  .detail-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+
+  .detail-specs {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .spec-item {
+    padding: 20px 24px;
+    transition: all 0.3s ease;
+  }
+
+  .spec-item:hover {
+    background-color: #edf2f7;
+    transform: translateY(-2px);
+  }
+
+  .spec-label {
+    font-size: 0.95rem;
+  }
+
+  .spec-value {
+    font-size: 1.15rem;
+  }
+
+  /* Legacy support */
   .item-image {
     flex: 1;
     max-width: 45%;
@@ -166,5 +240,34 @@
 
   .item-description {
     line-height: 1.8;
+  }
+
+  /* Error Page - Laptop */
+  .error-container {
+    padding: 80px 60px;
+  }
+
+  .error-icon {
+    width: 120px;
+    height: 120px;
+  }
+
+  .error-title {
+    font-size: 3rem;
+  }
+
+  .error-message {
+    font-size: 1.25rem;
+    max-width: 600px;
+  }
+
+  .error-actions {
+    max-width: 450px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 14px 32px;
+    font-size: 1.05rem;
   }
 }

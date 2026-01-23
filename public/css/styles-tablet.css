@@ -56,10 +56,27 @@
   /* Inventory Display - Tablet View */
   #inv-display {
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    margin: 24px 0;
+    gap: 28px;
+    margin: 28px 0;
   }
 
+  .vehicle-card {
+    border-radius: 16px;
+  }
+
+  .vehicle-info {
+    padding: 24px;
+  }
+
+  .vehicle-name {
+    font-size: 1.375rem;
+  }
+
+  .vehicle-price {
+    font-size: 1.5rem;
+  }
+
+  /* Legacy support */
   #inv-display li {
     padding: 20px;
   }
@@ -85,6 +102,44 @@
     padding: 24px 0;
   }
 
+  .detail-container {
+    display: flex;
+    flex-direction: row;
+    border-radius: 20px;
+  }
+
+  .detail-image-section {
+    flex: 1;
+    max-width: 50%;
+  }
+
+  .detail-info-section {
+    flex: 1;
+    padding: 32px 28px;
+  }
+
+  .detail-title {
+    font-size: 2rem;
+  }
+
+  .detail-price {
+    font-size: 2.25rem;
+  }
+
+  .detail-description {
+    font-size: 1.05rem;
+    margin-bottom: 32px;
+  }
+
+  .detail-specs {
+    gap: 18px;
+  }
+
+  .spec-item {
+    padding: 18px 20px;
+  }
+
+  /* Legacy support */
   .item-image {
     flex: 1;
     max-width: 50%;
@@ -101,5 +156,24 @@
 
   .item-price {
     font-size: calc(var(--font-size-large) * 1.1);
+  }
+
+  /* Error Page - Tablet */
+  .error-container {
+    padding: 60px 40px;
+  }
+
+  .error-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .error-title {
+    font-size: 2.5rem;
+  }
+
+  .error-actions {
+    flex-direction: row;
+    max-width: 400px;
   }
 }
