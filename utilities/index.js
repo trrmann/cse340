@@ -98,7 +98,14 @@ Util.buildItemDetailGrid = async function (data) {
       ' on CSE Motors" />';
     grid += '</div>';
     grid += '<div class="item-details">';
-    grid += '<h2>' + vehicle.inv_make + ' ' + vehicle.inv_model + '</h2>';
+    grid +=
+      '<h2>' +
+      vehicle.inv_year +
+      ' ' +
+      vehicle.inv_make +
+      ' ' +
+      vehicle.inv_model +
+      '</h2>';
     grid +=
       '<p class="item-price">Price: $' +
       new Intl.NumberFormat('en-US').format(vehicle.inv_price) +
