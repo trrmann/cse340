@@ -187,11 +187,11 @@ Util.buildItemDetailGrid = async function (data) {
     grid += '</div>';
     grid += '<div class="detail-specs">';
     grid += '<div class="spec-item">';
-    grid += '<span class="spec-label">Color</span>';
+    grid += '<span class="spec-label" role="text">Color</span>';
     grid += '<span class="spec-value">' + vehicle.inv_color + '</span>';
     grid += '</div>';
     grid += '<div class="spec-item">';
-    grid += '<span class="spec-label">Mileage</span>';
+    grid += '<span class="spec-label" role="text">Mileage</span>';
     grid +=
       '<span class="spec-value">' +
       new Intl.NumberFormat('en-US').format(vehicle.inv_miles) +
