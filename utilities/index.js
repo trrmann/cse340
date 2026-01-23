@@ -95,7 +95,7 @@ Util.buildClassificationGrid = async function (data) {
         vehicle.inv_make +
         ' ' +
         vehicle.inv_model +
-        '" class="vehicle-image" />';
+        '" class="vehicle-image">';
       grid += '</div>';
       grid += '<div class="vehicle-info">';
       grid += '<h2 class="vehicle-name">';
@@ -166,7 +166,7 @@ Util.buildItemDetailGrid = async function (data) {
       vehicle.inv_make +
       ' ' +
       vehicle.inv_model +
-      '" class="detail-image" />';
+      '" class="detail-image">';
     grid += '</div>';
     grid += '</div>';
     grid += '<div class="detail-info-section">';
