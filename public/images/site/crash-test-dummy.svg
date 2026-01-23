@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" fill="none">
+    <!-- Head with target circles -->
+    <circle cx="100" cy="60" r="45" fill="#FFD700" stroke="#000" stroke-width="3"/>
+    <circle cx="100" cy="60" r="35" fill="none" stroke="#000" stroke-width="2"/>
+    <circle cx="100" cy="60" r="25" fill="none" stroke="#000" stroke-width="2"/>
+    <circle cx="100" cy="60" r="15" fill="none" stroke="#000" stroke-width="2"/>
+    <circle cx="100" cy="60" r="8" fill="#000"/>
+    <!-- Eyes -->
+    <circle cx="85" cy="55" r="5" fill="#000"/>
+    <circle cx="115" cy="55" r="5" fill="#000"/>
+    <!-- Mouth (frown) -->
+    <path d="M 85 75 Q 100 70 115 75" stroke="#000" stroke-width="3" fill="none"/>
+    <!-- Body with chest target -->
+    <rect x="70" y="105" width="60" height="80" fill="#FFD700" stroke="#000" stroke-width="3" rx="5"/>
+    <circle cx="100" cy="145" r="20" fill="none" stroke="#000" stroke-width="2"/>
+    <circle cx="100" cy="145" r="13" fill="none" stroke="#000" stroke-width="2"/>
+    <circle cx="100" cy="145" r="6" fill="#000"/>
+    <!-- Warning stripes on body -->
+    <rect x="70" y="105" width="60" height="8" fill="#000" opacity="0.3"/>
+    <rect x="70" y="177" width="60" height="8" fill="#000" opacity="0.3"/>
+    <!-- Arms -->
+    <rect x="30" y="115" width="40" height="15" fill="#FFD700" stroke="#000" stroke-width="2" rx="3"/>
+    <rect x="130" y="115" width="40" height="15" fill="#FFD700" stroke="#000" stroke-width="2" rx="3"/>
+    <!-- Legs -->
+    <rect x="75" y="185" width="20" height="90" fill="#FFD700" stroke="#000" stroke-width="3" rx="3"/>
+    <rect x="105" y="185" width="20" height="90" fill="#FFD700" stroke="#000" stroke-width="3" rx="3"/>
+    <!-- Knee targets -->
+    <circle cx="85" cy="230" r="8" fill="none" stroke="#000" stroke-width="1.5"/>
+    <circle cx="115" cy="230" r="8" fill="none" stroke="#000" stroke-width="1.5"/>
+</svg>

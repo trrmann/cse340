@@ -1,9 +1,29 @@
+/**
+ * Utility functions for CSE Motors application
+ * Handles HTML generation for navigation, classification grids, and item details
+ * @module utilities/index
+ */
+
 const invModel = require('../models/inventory-model');
 const Util = {};
 
-/* ************************
- * Constructs the nav HTML unordered list
- ************************** */
+/**
+ * Constructs the navigation HTML as an unordered list
+ * Fetches all vehicle classifications from the database and generates
+ * a responsive navigation menu with links to each classification page
+ *
+ * @async
+ * @function getNav
+ * @param {Object} req - Express request object (unused but required for middleware signature)
+ * @param {Object} res - Express response object (unused but required for middleware signature)
+ * @param {Function} next - Express next middleware function (unused but required for middleware signature)
+ * @returns {Promise<string>} HTML string containing the complete navigation list
+ * @throws {Error} If database query fails
+ *
+ * @example
+ * const nav = await Util.getNav();
+ * // Returns: '<ul><li><a href="/">Home</a></li>...'
+ */
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications();
   let list = '<ul>';
@@ -24,10 +44,33 @@ Util.getNav = async function (req, res, next) {
   return list;
 };
 
-/* ************************
- * Build the classification view HTML
- ************************** */
-
+/**
+ * Builds the HTML grid for displaying vehicles in a classification
+ * Creates a responsive card-based grid layout with vehicle images,
+ * names, and prices. Each card is clickable and links to the detail page.
+ *
+ * @async
+ * @function buildClassificationGrid
+ * @param {Array<Object>} data - Array of vehicle objects from database
+ * @param {number} data[].inv_id - Unique vehicle inventory ID
+ * @param {string} data[].inv_year - Vehicle year
+ * @param {string} data[].inv_make - Vehicle manufacturer
+ * @param {string} data[].inv_model - Vehicle model name
+ * @param {string} data[].inv_thumbnail - Path to vehicle thumbnail image
+ * @param {number} data[].inv_price - Vehicle price in USD
+ * @returns {Promise<string>} HTML string containing the vehicle grid or notice message
+ *
+ * @description
+ * - Returns grid of vehicle cards if data exists
+ * - Returns "no vehicles found" message if array is empty
+ * - Prices are formatted with US locale (commas, dollar sign)
+ * - Images include alt text for accessibility
+ * - Cards use semantic HTML with ARIA labels
+ *
+ * @example
+ * const vehicles = await invModel.getInventoryByClassificationId(1);
+ * const grid = await Util.buildClassificationGrid(vehicles);
+ */
 Util.buildClassificationGrid = async function (data) {
   let grid;
   if (data.length > 0) {
@@ -73,10 +116,38 @@ Util.buildClassificationGrid = async function (data) {
   return grid;
 };
 
-/* ************************
- * Build the item detail view HTML
- ************************** */
-
+/**
+ * Builds the HTML for displaying a single vehicle's detailed information
+ * Creates a comprehensive detail view with full-size image, description,
+ * specifications, and pricing in a responsive card layout.
+ *
+ * @async
+ * @function buildItemDetailGrid
+ * @param {Array<Object>} data - Array containing single vehicle object (uses first element)
+ * @param {number} data[0].inv_id - Unique vehicle inventory ID
+ * @param {number} data[0].inv_year - Vehicle year
+ * @param {string} data[0].inv_make - Vehicle manufacturer
+ * @param {string} data[0].inv_model - Vehicle model name
+ * @param {string} data[0].inv_image - Path to full-size vehicle image
+ * @param {number} data[0].inv_price - Vehicle price in USD
+ * @param {string} data[0].inv_description - Detailed vehicle description
+ * @param {string} data[0].inv_color - Vehicle color
+ * @param {number} data[0].inv_miles - Vehicle mileage
+ * @returns {Promise<string>} HTML string containing the vehicle detail view or notice message
+ *
+ * @description
+ * - Uses full-size image (not thumbnail)
+ * - Displays year, make, model prominently
+ * - Formats price with US currency ($ and commas)
+ * - Formats mileage with commas
+ * - Shows color and mileage in specification grid
+ * - Responsive: vertical on mobile, horizontal on tablet+
+ * - ARIA labels for accessibility
+ *
+ * @example
+ * const vehicle = await invModel.getInventoryByInvId(5);
+ * const detailView = await Util.buildItemDetailGrid(vehicle);
+ */
 Util.buildItemDetailGrid = async function (data) {
   let grid;
   if (data && data.length > 0) {
@@ -135,11 +206,42 @@ Util.buildItemDetailGrid = async function (data) {
   return grid;
 };
 
-/* ****************************************
- * Middleware For Handling Errors
- * Wrap other function in this for
- * General Error Handling
- **************************************** */
+/**
+ * Express middleware wrapper for async error handling
+ * Wraps async route handlers to automatically catch rejected promises
+ * and pass errors to Express error handling middleware.
+ *
+ * @function handleErrors
+ * @param {Function} fn - Async route handler function to wrap
+ * @returns {Function} Express middleware function that handles promise rejection
+ *
+ * @description
+ * This higher-order function eliminates the need for try-catch blocks
+ * in every async route handler. It ensures all errors are properly
+ * forwarded to the Express error handling middleware via next(error).
+ *
+ * Without this wrapper:
+ * ```
+ * router.get('/route', async (req, res, next) => {
+ *   try {
+ *     await someAsyncOperation();
+ *   } catch (error) {
+ *     next(error);
+ *   }
+ * });
+ * ```
+ *
+ * With this wrapper:
+ * ```
+ * router.get('/route', Util.handleErrors(async (req, res, next) => {
+ *   await someAsyncOperation();
+ * }));
+ * ```
+ *
+ * @example
+ * const utilities = require('../utilities');
+ * router.get('/inv/type/:id', utilities.handleErrors(invController.buildByClassificationId));
+ */
 Util.handleErrors = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
 
