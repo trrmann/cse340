@@ -7,7 +7,7 @@ $exitCode = $LASTEXITCODE
 if ($exitCode -eq 0) {
     Write-Host "Push successful."
     # Open Render deploy page and end site in default browser
-    $renderDeployUrl = "https://dashboard.render.com/static/srv-d5ff83ur433s73av55p0"
+    $renderDeployUrl = "https://dashboard.render.com/web/srv-d5du7015pdvs73diamug/deploys/dep-d5pf6gbuibrs73cv7fgg"
     $renderSiteUrl = "https://cse340tm.onrender.com/"
     Start-Process $renderDeployUrl
     Start-Process $renderSiteUrl
