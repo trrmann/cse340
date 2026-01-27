@@ -1,3 +1,4 @@
+// Static routes: Serves public assets (css, js, images).
 const express = require('express');
 const router = express.Router();
 

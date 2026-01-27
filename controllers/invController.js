@@ -1,43 +1,11 @@
-/**
- * Inventory Controller for CSE Motors Application
- * Handles vehicle inventory display by classification and individual item details
- * @module controllers/invController
- */
+// Inventory Controller: Handles vehicle inventory display by classification and item detail.
 
 const invModel = require('../models/inventory-model');
 const utilities = require('../utilities/');
 
 const invCont = {};
 
-/**
- * Build and render inventory classification view
- * Displays all vehicles in a specific classification as a responsive grid
- * of cards with images, names, and prices.
- *
- * @async
- * @function buildByClassificationId
- * @param {Object} req - Express request object
- * @param {Object} req.params - URL parameters
- * @param {string} req.params.classification_id - Classification ID from route parameter
- * @param {Object} res - Express response object
- * @param {Function} next - Express next middleware function for error handling
- * @returns {Promise<void>} Renders classification.ejs view or forwards error
- * @throws {Error} Forwards any database or rendering errors to error middleware
- *
- * @description
- * Route: GET /inv/type/:classification_id
- *
- * Process:
- * 1. Extracts classification_id from URL params
- * 2. Fetches all vehicles in that classification from database
- * 3. Generates HTML grid of vehicle cards
- * 4. Generates navigation menu
- * 5. Renders view with title showing classification name
- *
- * @example
- * // URL: /inv/type/2 (for SUVs)
- * // Results in page showing all SUV vehicles in grid layout
- */
+// Renders all vehicles in a classification as a grid view.
 invCont.buildByClassificationId = async function (req, res, next) {
   try {
     const classification_id = req.params.classification_id;
@@ -56,8 +24,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
   }
 };
 
-/**
- * Build and render individual vehicle detail view
+// Renders individual vehicle detail view.
  * Displays comprehensive information about a specific vehicle including
  * full-size image, description, specifications, and pricing.
  *

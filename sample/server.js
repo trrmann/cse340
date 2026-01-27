@@ -1,3 +1,4 @@
+// Sample server: Minimal Express app for demonstration.
 /* ******************************************
  * This is the application server
  * ******************************************/

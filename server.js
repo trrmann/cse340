@@ -1,7 +1,4 @@
-/* ******************************************
- * This server.js file is the primary file of the
- * application. It is used to control the project.
- *******************************************/
+// Main server file: Sets up Express app, routes, error handling, and view engine.
 /* ***********************
  * Require Statements
  *************************/
