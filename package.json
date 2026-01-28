@@ -8,16 +8,23 @@
     "dev": "nodemon server.js",
     "lint": "eslint . --ext .js",
     "format": "prettier --write .",
+    "test": "echo \"No tests defined.\" && exit 0",
     "build": "pnpm install",
     "preview": "pnpm start"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "connect-flash": "^0.1.1",
+    "connect-pg-simple": "^10.0.0",
+    "deep-is": "^0.1.4",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.10",
+    "eslint-visitor-keys": "^5.0.0",
     "express": "^4.18.2",
     "express-ejs-layouts": "^2.5.1",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.19.0",
     "pg": "^8.8.0"
   },
   "devDependencies": {
