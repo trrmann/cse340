@@ -119,33 +119,98 @@ $message += "Do you want to terminate this process to free the port?"
 
 $userApprove = $false
 if ($canUseGui) {
-    $result = [System.Windows.Forms.MessageBox]::Show(
-        $message,
-        "Port $Port In Use - Kill Process?",
-        [System.Windows.Forms.MessageBoxButtons]::YesNo,
-        [System.Windows.Forms.MessageBoxIcon]::Question
-    )
+    # Use a background form to implement a timeout for the Yes/No dialog
+    Add-Type -AssemblyName System.Windows.Forms
+    $form = New-Object System.Windows.Forms.Form
+    $form.Text = "Port $Port In Use - Kill Process?"
+    $form.Width = 500
+    $form.Height = 220
+    $form.StartPosition = 'CenterScreen'
+    $label = New-Object System.Windows.Forms.Label
+    $label.Text = $message
+    $label.AutoSize = $true
+    $label.Top = 20
+    $label.Left = 20
+    $form.Controls.Add($label)
+    $yesButton = New-Object System.Windows.Forms.Button
+    $yesButton.Text = "Yes"
+    $yesButton.DialogResult = [System.Windows.Forms.DialogResult]::Yes
+    $yesButton.Top = 120
+    $yesButton.Left = 120
+    $form.Controls.Add($yesButton)
+    $noButton = New-Object System.Windows.Forms.Button
+    $noButton.Text = "No"
+    $noButton.DialogResult = [System.Windows.Forms.DialogResult]::No
+    $noButton.Top = 120
+    $noButton.Left = 220
+    $form.Controls.Add($noButton)
+    $form.AcceptButton = $yesButton
+    $form.CancelButton = $noButton
+    $timer = New-Object System.Windows.Forms.Timer
+    $timer.Interval = 10000 # 10 seconds
+    $timer.Add_Tick({
+        $form.DialogResult = [System.Windows.Forms.DialogResult]::Yes
+        $form.Close()
+    })
+    $timer.Start()
+    $result = $form.ShowDialog()
+    $timer.Stop()
     if ($result -eq [System.Windows.Forms.DialogResult]::Yes) {
         $userApprove = $true
     } else {
-        [System.Windows.Forms.MessageBox]::Show(
-            "Workflow cancelled. Please manually stop the service using port $Port and try again.",
-            "Workflow Cancelled",
-            [System.Windows.Forms.MessageBoxButtons]::OK,
-            [System.Windows.Forms.MessageBoxIcon]::Information
-        ) | Out-Null
+        # Show OK popup with timeout for cancellation
+        $cancelForm = New-Object System.Windows.Forms.Form
+        $cancelForm.Text = "Workflow Cancelled"
+        $cancelForm.Width = 400
+        $cancelForm.Height = 150
+        $cancelForm.StartPosition = 'CenterScreen'
+        $cancelLabel = New-Object System.Windows.Forms.Label
+        $cancelLabel.Text = "Workflow cancelled. Please manually stop the service using port $Port and try again."
+        $cancelLabel.AutoSize = $true
+        $cancelLabel.Top = 20
+        $cancelLabel.Left = 20
+        $cancelForm.Controls.Add($cancelLabel)
+        $okButton = New-Object System.Windows.Forms.Button
+        $okButton.Text = "OK"
+        $okButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+        $okButton.Top = 60
+        $okButton.Left = 150
+        $cancelForm.Controls.Add($okButton)
+        $okTimer = New-Object System.Windows.Forms.Timer
+        $okTimer.Interval = 10000
+        $okTimer.Add_Tick({
+            $cancelForm.DialogResult = [System.Windows.Forms.DialogResult]::OK
+            $cancelForm.Close()
+        })
+        $okTimer.Start()
+        $null = $cancelForm.ShowDialog()
+        $okTimer.Stop()
         exit 1
     }
 } else {
     Write-Host $message -ForegroundColor Yellow
-    while ($true) {
-        $answer = Read-Host "Terminate process? (Y/N)"
-        if ($answer -match '^[Yy]') { $userApprove = $true; break }
-        if ($answer -match '^[Nn]') { $userApprove = $false; break }
-        Write-Host "Please enter Y or N."
+    $answer = $null
+    $sw = [Diagnostics.Stopwatch]::StartNew()
+    while ($sw.Elapsed.TotalSeconds -lt 10) {
+        if ($Host.UI.RawUI.KeyAvailable) {
+            $answer = Read-Host "Terminate process? (Y/N) [Default: Y in 10s]"
+            break
+        }
+        Start-Sleep -Milliseconds 200
+    }
+    $sw.Stop()
+    if ($null -eq $answer -or $answer -eq "") {
+        $userApprove = $true
+    } elseif ($answer -match '^[Yy]') {
+        $userApprove = $true
+    } elseif ($answer -match '^[Nn]') {
+        $userApprove = $false
+    } else {
+        $userApprove = $true
     }
     if (-not $userApprove) {
         Write-Host "Workflow cancelled. Please manually stop the service using port $Port and try again." -ForegroundColor Cyan
+        Start-Sleep -Seconds 2
         exit 1
     }
 }
@@ -166,12 +231,37 @@ try {
         $okTitle = "Port Still In Use"
         $okIcon = [System.Windows.Forms.MessageBoxIcon]::Warning
     }
-    [System.Windows.Forms.MessageBox]::Show(
-        $okMsg,
-        $okTitle,
-        [System.Windows.Forms.MessageBoxButtons]::OK,
-        $okIcon
-    ) | Out-Null
+    if ($canUseGui) {
+        $okForm = New-Object System.Windows.Forms.Form
+        $okForm.Text = $okTitle
+        $okForm.Width = 400
+        $okForm.Height = 150
+        $okForm.StartPosition = 'CenterScreen'
+        $okLabel = New-Object System.Windows.Forms.Label
+        $okLabel.Text = $okMsg
+        $okLabel.AutoSize = $true
+        $okLabel.Top = 20
+        $okLabel.Left = 20
+        $okForm.Controls.Add($okLabel)
+        $okButton = New-Object System.Windows.Forms.Button
+        $okButton.Text = "OK"
+        $okButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+        $okButton.Top = 60
+        $okButton.Left = 150
+        $okForm.Controls.Add($okButton)
+        $okTimer = New-Object System.Windows.Forms.Timer
+        $okTimer.Interval = 10000
+        $okTimer.Add_Tick({
+            $okForm.DialogResult = [System.Windows.Forms.DialogResult]::OK
+            $okForm.Close()
+        })
+        $okTimer.Start()
+        $null = $okForm.ShowDialog()
+        $okTimer.Stop()
+    } else {
+        Write-Host $okMsg -ForegroundColor Cyan
+        Start-Sleep -Seconds 2
+    }
     if ($portFree) {
         exit 0
     } else {

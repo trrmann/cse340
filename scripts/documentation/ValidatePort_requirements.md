@@ -13,13 +13,15 @@ Ensure a specified port is available for use by the application. If the port is 
    - If the port is in use, the script must identify the process (name, PID, path) using the port.
 3. **User Popup Prompt for Action**
    - The script must present a popup message to the user with Yes/No options:
-     - **Yes**: Attempt to kill the process using the port.
+     - The popup must include a timeout of 10 seconds. If the user does not respond within the timeout, the script must default to a **Yes** response.
+     - **Yes** (or timeout): Attempt to kill the process using the port.
      - **No**: Exit gracefully, informing the user that the workflow is cancelled.
 4. **Post-Kill Verification and User Notification**
    - After attempting to kill the process, the script must re-check if the port is free.
    - It must present a popup message with an OK button only, informing the user whether the port was successfully freed or not.
    - If the port is free, the script must exit successfully (exit code 0).
    - If the port is still in use, the script must exit with an error (exit code 1).
+   - The OK popup must include a timeout of 10 seconds. If the user does not respond within the timeout, the script must proceed as if OK was clicked.
 5. **Edge Case Handling**
    - If the process cannot be identified, the script must inform the user and exit with an error.
    - If the kill operation fails, the script must inform the user and exit with an error.
