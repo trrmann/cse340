@@ -6,13 +6,24 @@ const session = require('express-session');
 const pool = require('./database/');
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
-const env = require('dotenv').config();
+// Load environment variables
+const path = require('path');
+const dotenv = require('dotenv');
+if (process.env.NODE_ENV === 'production' && !process.env.RENDER) {
+  // Explicitly load .env.production.local if in production and not on Render
+  dotenv.config({
+    path: path.join(__dirname, '.env.production.local'),
+    override: true,
+  });
+} else {
+  dotenv.config();
+}
 const app = express();
-const static = require('./routes/static');
 const baseController = require('./controllers/baseController');
 const inventoryRoute = require('./routes/inventoryRoute');
 const errorRoute = require('./routes/errorRoute');
 const utilities = require('./utilities/');
+const accountRoute = require('./routes/accountRoute');
 
 /* ***********************
  * Middleware
@@ -32,7 +43,7 @@ app.use(
 
 // Express Messages Middleware
 app.use(require('connect-flash')());
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res);
   next();
 });
@@ -47,9 +58,12 @@ app.set('layout', './layouts/layout'); // not at views root
 /* ***********************
  * Routes
  *************************/
-app.use(static);
+// Serve static files directly from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
 // Inventory routes
 app.use('/inv', inventoryRoute);
+// Account routes
+app.use('/account', accountRoute);
 // Error route for testing
 app.use('/error', errorRoute);
 // Index route

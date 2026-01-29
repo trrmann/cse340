@@ -1,3 +1,5 @@
+#
+# See functional requirements: scripts/documentation/Run_requirements.md
 # Run.ps1
 # Usage: .\Run.ps1 <ScriptName.ps1> [args]
 # Runs a PowerShell script from the scripts folder with any additional arguments

@@ -1,5 +1,12 @@
 /* Tablet-specific overrides for screens between 600px and 1023px */
 @media (min-width: 600px) and (max-width: 1023px) {
+  .responsive-login {
+    max-width: 480px;
+    padding: 32px 32px 24px 32px;
+  }
+  .login-title {
+    font-size: 1.7rem;
+  }
   .site-container {
     flex: 1;
     display: flex;

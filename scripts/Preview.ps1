@@ -1,3 +1,5 @@
+#
+# See functional requirements: scripts/documentation/Preview_requirements.md
 # Preview.ps1
 # Wrapper script to run 'npm run preview' from the project root
 

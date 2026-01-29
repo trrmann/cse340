@@ -1,3 +1,5 @@
+#
+# See functional requirements: scripts/documentation/Install_requirements.md
 # Install.ps1
 # Wrapper script to run 'pnpm install' from the project root
 

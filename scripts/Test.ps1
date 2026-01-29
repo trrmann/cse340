@@ -1,3 +1,5 @@
+#
+# See functional requirements: scripts/documentation/Test_requirements.md
 # Test.ps1
 # Wrapper script to run 'pnpm test' from the project root
 

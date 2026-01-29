@@ -1,3 +1,5 @@
+#
+# See functional requirements: scripts/documentation/Build_requirements.md
 # Build.ps1
 # Wrapper script to run 'pnpm run build' from the project root
 # For Node.js/Express projects without a build step, this validates the project setup

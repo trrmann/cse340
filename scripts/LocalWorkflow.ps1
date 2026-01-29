@@ -1,4 +1,5 @@
-# Load environment variables from .env file if present
+#
+# See functional requirements: scripts/documentation/LocalWorkflow_requirements.md
 $envFile = Join-Path $PSScriptRoot '..' '.env'
 if (Test-Path $envFile) {
     Get-Content $envFile | ForEach-Object {
@@ -50,7 +51,7 @@ $steps = @(
     @{ Name = "Format"; Script = "Format.ps1"; SkipVar = "SKIP_FORMAT" },
     @{ Name = "TestDbConnection"; Script = "TestDbConnection.ps1"; SkipVar = "SKIP_DBTEST" },
     @{ Name = "Test"; Script = "Test.ps1"; SkipVar = "SKIP_TEST" },
-    @{ Name = "Start"; Script = "Start.ps1"; SkipVar = "SKIP_START" }
+    @{ Name = "Start"; Script = "RunAndLog.ps1"; SkipVar = "SKIP_START" }
 )
 
 foreach ($step in $steps) {
@@ -74,12 +75,28 @@ foreach ($step in $steps) {
         }
         Check-Outdated
     } elseif ($step.Name -eq "Start") {
-        Write-Host "All checks passed. Starting development server in a new PowerShell window..."
+        Write-Host "All checks passed. Starting development server with output to screen and log..."
         $startScript = Join-Path $PSScriptRoot $step.Script
-        Start-Process powershell.exe -ArgumentList "-Command", "& '$startScript'" -WindowStyle Normal
-        Write-Host "Development server started in a new window. Close that window to stop the server."
-        $devUrl = "http://localhost:5500/"
-        Start-Process $devUrl
+        & $startScript StartDev.ps1
+        if ($LASTEXITCODE -ne 0) {
+            Write-Error "Development server failed to start. See log for details."
+            exit $LASTEXITCODE
+        }
+        Write-Host "Development server exited. See log for details."
+    }
+
+# Enforce port check (auto-kill, no prompt, no SKIP_PORT_CHECK)
+Write-Host "Checking port availability for development server..." -ForegroundColor Cyan
+$validatePortScript = Join-Path $PSScriptRoot "ValidatePort.ps1"
+$port = $env:PORT
+if (-not $port) { $port = 5500 }
+if (Test-Path $validatePortScript) {
+    & $validatePortScript -Port $port -ServiceName "Node Development Server"
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "Port $port validation failed. Cannot start development server."
+        exit 1
+    }
+}
     } elseif ($step.Name -eq "TestDbConnection") {
         Write-Host "Validating database connectivity before starting server..."
         & $scriptPath
@@ -109,3 +126,5 @@ foreach ($step in $steps) {
 }
 
 Write-Host "Local workflow completed successfully."
+
+

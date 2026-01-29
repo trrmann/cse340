@@ -8,16 +8,13 @@ require('dotenv').config();
  * If - else will make determination which to use
  * *************** */
 let pool;
-if (process.env.NODE_ENV == 'development') {
+const isLocalhost = process.env.DATABASE_URL?.includes('localhost');
+if (isLocalhost) {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false,
-    },
+    ssl: false,
   });
-
-  // Added for troubleshooting queries
-  // during development
+  // Added for troubleshooting queries during development
   module.exports = {
     async query(text, params) {
       try {
@@ -33,6 +30,17 @@ if (process.env.NODE_ENV == 'development') {
 } else {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false },
   });
-  module.exports = pool;
+  module.exports = {
+    async query(text, params) {
+      try {
+        const res = await pool.query(text, params);
+        return res;
+      } catch (error) {
+        console.error('error in query', { text });
+        throw error;
+      }
+    },
+  };
 }

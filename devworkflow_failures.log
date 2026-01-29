@@ -1,0 +1,219 @@
+﻿
+===== Failure captured at 2026-01-28T15:13:02.0265896-05:00 =====
+Script: DevWorkflow.ps1
+ExitCode: 1
+Output:
+Running C:\Users\trman\OneDrive - BYU-Idaho\Documents\Projects\cse340\scripts\DevWorkflow.ps1 ...
+Join-Path : A positional parameter cannot be found that accepts argument '.env'.
+At C:\Users\trman\OneDrive - BYU-Idaho\Documents\Projects\cse340\scripts\DevWorkflow.ps1:4 char:12
++ $envFile = Join-Path $PSScriptRoot '..' '.env'
++            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Join-Path], ParameterBindingException
+    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.PowerShell.Commands.JoinPathComma 
+   nd
+ 
+Test-Path : Cannot bind argument to parameter 'Path' because it is null.
+At C:\Users\trman\OneDrive - BYU-Idaho\Documents\Projects\cse340\scripts\DevWorkflow.ps1:5 char:15
++ if (Test-Path $envFile) {
++               ~~~~~~~~
+    + CategoryInfo          : InvalidData: (:) [Test-Path], ParameterBindingValidationException
+    + FullyQualifiedErrorId : ParameterArgumentValidationErrorNullNotAllowed,Microsoft.PowerShell.Com 
+   mands.TestPathCommand
+ 
+C:\Users\trman\OneDrive - BYU-Idaho\Documents\Projects\cse340\scripts\DevWorkflow.ps1 : Missing 
+required environment variables: DATABASE_URL, SESSION_SECRET, PORT
+At C:\Users\trman\OneDrive - BYU-Idaho\Documents\Projects\cse340\Run.ps1:20 char:1
++ & $scriptPath @Args
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,DevWorkflow.ps1
+ 
+============================================================
+
+
+===== Timeout captured at 2026-01-28T15:17:42.7805167-05:00 (>60 s) =====
+Script: DevWorkflow.ps1
+ExitCode: 124
+Stdout:
+
+
+Stderr:
+
+============================================================
+
+
+===== Failure captured at 2026-01-28T15:18:02.6053606-05:00 =====
+Script: DevWorkflow.ps1
+ExitCode: 
+Stdout:
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+
+
+Stderr:
+Processing -File 'C:\Users\trman\OneDrive' failed because the file does not have a '.ps1' extension. Specify a valid Windows PowerShell script file name, and then try again.
+
+============================================================
+
+
+===== Timeout captured at 2026-01-28T15:19:29.7165938-05:00 (>60 s) =====
+Script: DevWorkflow.ps1
+ExitCode: 124
+Stdout:
+Running C:\Users\trman\OneDrive - BYU-Idaho\Documents\Projects\cse340\scripts\DevWorkflow.ps1 ...
+Validating environment configuration...
+
+========================================
+Environment Configuration Validation (development)
+========================================
+
+Checking environment files...
+  [PASS] .env (root)
+
+Checking required environment variables...
+  [PASS] PORT (value hidden for security)
+  [PASS] DATABASE_URL (value hidden for security)
+  [PASS] SESSION_SECRET (value hidden for security)
+
+========================================
+Validation Result: PASSED
+========================================
+
+Checking port availability for development server...
+
+========================================
+Port Availability Check - Port 5500
+========================================
+
+
+
+Stderr:
+
+============================================================
+
+
+===== Timeout captured at 2026-01-28T15:22:42.9339908-05:00 (>120 s) =====
+Script: DevWorkflow.ps1
+ExitCode: 124
+Stdout:
+Running C:\Users\trman\OneDrive - BYU-Idaho\Documents\Projects\cse340\scripts\DevWorkflow.ps1 ...
+Validating environment configuration...
+
+========================================
+Environment Configuration Validation (development)
+========================================
+
+Checking environment files...
+  [PASS] .env (root)
+
+Checking required environment variables...
+  [PASS] PORT (value hidden for security)
+  [PASS] DATABASE_URL (value hidden for security)
+  [PASS] SESSION_SECRET (value hidden for security)
+
+========================================
+Validation Result: PASSED
+========================================
+
+Checking port availability for development server...
+
+========================================
+Port Availability Check - Port 5500
+========================================
+
+
+
+Stderr:
+
+============================================================
+
+
+===== Timeout captured at 2026-01-28T15:26:50.6794760-05:00 (>120 s) =====
+Script: DevWorkflow.ps1
+ExitCode: 124
+Stdout:
+Running C:\Users\trman\OneDrive - BYU-Idaho\Documents\Projects\cse340\scripts\DevWorkflow.ps1 ...
+Validating environment configuration...
+
+========================================
+Environment Configuration Validation (development)
+========================================
+
+Checking environment files...
+  [PASS] .env (root)
+
+Checking required environment variables...
+  [PASS] PORT (value hidden for security)
+  [PASS] DATABASE_URL (value hidden for security)
+  [PASS] SESSION_SECRET (value hidden for security)
+
+========================================
+Validation Result: PASSED
+========================================
+
+Checking port availability for development server...
+
+========================================
+Port Availability Check - Port 5500
+========================================
+
+
+
+Stderr:
+
+============================================================
+
+
+===== Timeout captured at 2026-01-28T15:30:28.5294459-05:00 (>120 s) =====
+Script: DevWorkflow.ps1
+ExitCode: 124
+Stdout:
+Running C:\Users\trman\OneDrive - BYU-Idaho\Documents\Projects\cse340\scripts\DevWorkflow.ps1 ...
+Validating environment configuration...
+
+========================================
+Environment Configuration Validation (development)
+========================================
+
+Checking environment files...
+  [PASS] .env (root)
+
+Checking required environment variables...
+  [PASS] PORT (value hidden for security)
+  [PASS] DATABASE_URL (value hidden for security)
+  [PASS] SESSION_SECRET (value hidden for security)
+
+========================================
+Validation Result: PASSED
+========================================
+
+Checking port availability for development server...
+
+========================================
+Port Availability Check - Port 5500
+========================================
+
+
+
+Stderr:
+
+============================================================
+
+
+===== Failure captured at 2026-01-28T16:50:08.7326794-05:00 =====
+Script: StartDev.ps1
+ExitCode: 
+Stdout:
+Running C:\Users\trman\OneDrive - BYU-Idaho\Documents\Projects\cse340\scripts\StartDev.ps1 ...
+Starting development server...
+Development server started in a new window.
+The window will stay open to show any errors.
+
+
+Stderr:
+
+============================================================
+

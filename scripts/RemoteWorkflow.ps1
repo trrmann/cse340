@@ -1,82 +1,97 @@
-$projectRoot = $PSScriptRoot | Split-Path -Parent
+#
+# See functional requirements: scripts/documentation/RemoteWorkflow_requirements.md
+<#
+.SYNOPSIS
+    Complete remote deployment workflow with production testing.
 
-# Dependency management: clean and reinstall if install fails, check for outdated
-function Clean-Dependencies {
-    Write-Host "Cleaning node_modules and lockfile..."
-    Remove-Item -Recurse -Force "$projectRoot\node_modules" -ErrorAction SilentlyContinue
-    Remove-Item "$projectRoot\pnpm-lock.yaml" -ErrorAction SilentlyContinue
-}
+.DESCRIPTION
+    Executes the full deployment workflow:
+    1. Validates production environment configuration
+    2. Installs npm dependencies
+    3. Runs ESLint to check for code errors
+    4. Runs Prettier to format code
+    5. Builds production files to /dist
+    6. Checks port 3000 availability for proxy server
+    7. Starts production proxy server for testing
+    8. Opens browser when server is confirmed running
+    9. Prompts for testing confirmation
+    10. Commits changes to git
+    11. Pushes to GitHub (triggers Render deployment)
 
-function Check-Outdated {
-    Write-Host "Checking for outdated dependencies..."
-    Push-Location $projectRoot
-    pnpm outdated
-    Pop-Location
-}
+    The workflow includes automatic validation and will:
+    - Verify .env.production exists with required variables
+    - Detect port conflicts and offer to kill blocking processes
+    - Wait for server startup before opening browser
+    - Allow manual testing before commit
+    - Exit if any step fails or user cancels
 
-# RemoteWorkflow.ps1
-# Runs all remote deployment steps: install, lint, format, database connectivity test, automated tests, build, preview, commit, and push.
-# Each step can be skipped by setting the corresponding environment variable (e.g., SKIP_LINT=1).
-# Fails fast if any step fails. Validates required environment variables before running.
-# Validates required environment variables before running workflow steps
-$requiredEnvVars = @('DATABASE_URL', 'SESSION_SECRET', 'PORT')
-$missingVars = $requiredEnvVars | Where-Object {
-    $item = Get-Item "Env:\$_" -ErrorAction SilentlyContinue
-    -not ($item -and $item.Value -ne "")
-}
-if ($missingVars.Count -gt 0) {
-    Write-Error "Missing required environment variables: $($missingVars -join ', ')"
+.EXAMPLE
+    .\Run.ps1 RemoteWorkflow.ps1
+    Runs the complete deployment workflow.
+
+.NOTES
+    Exit Code 0: Success - deployed to GitHub/Render
+    Exit Code 1: Failure - validation, build, or deployment failed
+    
+    Test server runs at http://localhost:3000/
+    After push, Render auto-deploys from GitHub.
+    
+    Author: Sleep Outside Team 04
+    Version: 2.0
+#>
+
+# Pre-validation: Check production environment configuration
+Write-Host "Validating production environment configuration..." -ForegroundColor Cyan
+$validateScript = Join-Path $PSScriptRoot "ValidateEnvironment.ps1"
+& $validateScript -Environment "production"
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Production environment validation failed. Please fix the issues and try again."
     exit 1
 }
-# Runs Install, Lint, Format, Build, Preview, Commit, and Push scripts in order for remote deployment
 
 $steps = @(
-    @{ Name = "Install"; Script = "Install.ps1"; SkipVar = "SKIP_INSTALL" },
-    @{ Name = "Lint"; Script = "Lint.ps1"; SkipVar = "SKIP_LINT" },
-    @{ Name = "Format"; Script = "Format.ps1"; SkipVar = "SKIP_FORMAT" },
-    @{ Name = "TestDbConnection"; Script = "TestDbConnection.ps1"; SkipVar = "SKIP_DBTEST" },
-    @{ Name = "Test"; Script = "Test.ps1"; SkipVar = "SKIP_TEST" },
-    @{ Name = "Build"; Script = "Build.ps1"; SkipVar = "SKIP_BUILD" },
-    @{ Name = "Preview"; Script = "Preview.ps1"; SkipVar = "SKIP_PREVIEW" }
+    @{ Name = "Install"; Script = "Install.ps1" },
+    @{ Name = "Lint"; Script = "Lint.ps1" },
+    @{ Name = "Format"; Script = "Format.ps1" },
+    @{ Name = "Build"; Script = "Build.ps1" }
 )
 
 foreach ($step in $steps) {
-    $skipItem = Get-Item "Env:\$($step.SkipVar)" -ErrorAction SilentlyContinue
-    if ($skipItem -and $skipItem.Value -ne "") {
-        Write-Host "Skipping $($step.Name) step due to environment variable $($step.SkipVar)."
-        continue
-    }
     Write-Host "Running $($step.Name) (live output)..."
     $scriptPath = Join-Path $PSScriptRoot $step.Script
-    if ($step.Name -eq "Install") {
+    if ($step.Name -eq "Lint") {
+        Write-Host "Running Lint: "
         & $scriptPath
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Install failed. Attempting clean and reinstall..."
-            Clean-Dependencies
-            & $scriptPath
-            if ($LASTEXITCODE -ne 0) {
-                Write-Error "Install failed after cleaning dependencies. Exiting workflow."
-                exit $LASTEXITCODE
+        $fixExit = $LASTEXITCODE
+        # If initial lint found problems, try auto-fix, then re-run to show remaining problems
+        if ($fixExit -ne 0) {
+            Write-Host "Running Lint: attempting auto-fix with '--fix'..."
+            & npm run lint -- --fix
+            $fixExit = $LASTEXITCODE
+            if ($fixExit -ne 0) {
+                Write-Host "Auto-fix did not resolve all issues. Running lint to show remaining problems..." -ForegroundColor Yellow
+                & $scriptPath
+                $lintExit = $LASTEXITCODE
+                if ($lintExit -eq 0) {
+                    Write-Host "[WARN] Lint reported warnings only after auto-fix; continuing." -ForegroundColor Yellow
+                } else {
+                    Write-Host "[FAIL] Lint errors remain after attempting --fix." -ForegroundColor Red
+                    Write-Host "Please run 'npm run lint -- --fix' or fix issues manually. Exiting workflow to avoid deploying broken code." -ForegroundColor Yellow
+                    exit 1
+                }
+            } else {
+                # Check for unstaged changes resulting from --fix (if any) and commit them
+                $projectRoot = $PSScriptRoot | Split-Path -Parent
+                Push-Location $projectRoot
+                $status = git status --porcelain
+                if ($status) {
+                    Write-Host "ESLint --fix modified files; committing fixes before proceeding..." -ForegroundColor Cyan
+                    git add -A
+                    git commit -m "chore: apply eslint --fix" --no-verify
+                }
+                Pop-Location
+                Write-Host "[PASS] Lint passed after auto-fix." -ForegroundColor Green
             }
-        }
-        Check-Outdated
-    } elseif ($step.Name -eq "TestDbConnection") {
-        Write-Host "Validating database connectivity before continuing..."
-        & $scriptPath
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Database connectivity test failed. Please check your network, firewall, and database credentials. Exiting workflow."
-            exit $LASTEXITCODE
-        } else {
-            Write-Host "Database connectivity test passed."
-        }
-    } elseif ($step.Name -eq "Test") {
-        Write-Host "Running automated tests..."
-        & $scriptPath
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Automated tests failed. Exiting workflow."
-            exit $LASTEXITCODE
-        } else {
-            Write-Host "Automated tests passed."
         }
     } else {
         & $scriptPath
@@ -84,31 +99,98 @@ foreach ($step in $steps) {
             Write-Error "Step '$($step.Name)' failed. Exiting workflow."
             exit $LASTEXITCODE
         }
-        if ($step.Name -eq "Preview") {
-            Write-Host "All checks passed. Preview completed. You may close the preview window."
+    }
+}
+
+
+# Enforce port check for both proxy (3000) and app (5500)
+Write-Host "`nChecking port availability for production proxy server (3000) and app server (5500)..." -ForegroundColor Cyan
+$validatePortScript = Join-Path $PSScriptRoot "ValidatePort.ps1"
+$portsToCheck = @()
+$portsToCheck += @{ Port = 3000; ServiceName = "Production Proxy Server" }
+$appPort = $env:PORT
+if (-not $appPort) { $appPort = 5500 }
+$portsToCheck += @{ Port = $appPort; ServiceName = "App Server" }
+foreach ($portCheck in $portsToCheck) {
+    if (Test-Path $validatePortScript) {
+        & $validatePortScript -Port $portCheck.Port -ServiceName $portCheck.ServiceName
+        if ($LASTEXITCODE -ne 0) {
+            Write-Error "Port $($portCheck.Port) validation failed for $($portCheck.ServiceName). Cannot start production workflow."
+            exit 1
         }
     }
 }
 
-# Commit step
-$commitScript = Join-Path $PSScriptRoot "Commit.ps1"
-$commitMsg = Read-Host "Enter commit message (leave blank to exit)"
-if ([string]::IsNullOrWhiteSpace($commitMsg)) {
-    Write-Host "No commit message provided. Exiting workflow."
-    exit 0
-}
-& $commitScript -Message $commitMsg
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "Commit step failed. Exiting workflow."
-    exit $LASTEXITCODE
+# Test production proxy server
+Write-Host "`nTesting production proxy server..."
+Write-Host "Starting proxy server in a new PowerShell window..."
+$projectRoot = $PSScriptRoot | Split-Path -Parent
+Start-Process powershell.exe -ArgumentList "-NoExit", "-Command", "cd '$projectRoot'; npm run serve" -WindowStyle Normal
+
+# Wait for server to start and verify it's running
+Write-Host "Waiting for proxy server to start..."
+$maxAttempts = 30
+$attempt = 0
+$serverRunning = $false
+$testUrl = "http://localhost:3000"
+
+while ($attempt -lt $maxAttempts) {
+    Start-Sleep -Seconds 1
+    $attempt++
+    
+    try {
+        $connection = Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue
+        if ($connection) {
+            # Port is listening, give it another second to fully initialize
+            Start-Sleep -Seconds 1
+            $serverRunning = $true
+            break
+        }
+    } catch {
+        # Continue waiting
+    }
+    
+    Write-Host "  Attempt $attempt/$maxAttempts..." -NoNewline
+    Write-Host "`r" -NoNewline
 }
 
-# Push step
-$pushScript = Join-Path $PSScriptRoot "Push.ps1"
-& $pushScript
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "Push step failed. Exiting workflow."
-    exit $LASTEXITCODE
+if ($serverRunning) {
+    Write-Host "`n[PASS] Production proxy server is running on port 3000" -ForegroundColor Green
+    Write-Host "Opening browser to $testUrl for testing..."
+    Start-Process $testUrl
+} else {
+    Write-Host "`n[FAIL] Production proxy server failed to start within 30 seconds" -ForegroundColor Red
+    Write-Host "Please check the server window for error messages."
+    Write-Error "Server startup failed. Exiting workflow."
+    exit 1
+}
+
+Write-Host "`nTest the application, then close the server window when done."
+$continue = Read-Host "Press Enter when ready to commit and push (or type 'exit' to cancel)"
+if ($continue -eq "exit") {
+    Write-Host "Workflow cancelled."
+    exit 0
+}
+
+# Check if there are any changes to commit
+Write-Host "`nChecking for changes to commit..."
+git add -A
+$status = git status --porcelain
+if (-not $status) {
+    Write-Host "[INFO] No changes to commit. Workflow completed successfully." -ForegroundColor Yellow
+    Write-Host "Exiting in 5 seconds..."
+    Start-Sleep -Seconds 5
+    exit 0
 }
 
 Write-Host "Remote workflow completed successfully."
+
+
+# Commit and push step (handled by Commit.ps1)
+$commitScript = Join-Path $PSScriptRoot "Commit.ps1"
+& $commitScript
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Commit/push step failed. Exiting workflow."
+    exit $LASTEXITCODE
+}
+Write-Host "All changes committed and pushed successfully. Render will auto-deploy with proxy server."

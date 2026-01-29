@@ -1,5 +1,12 @@
 /* Large screen overrides for screens wider than 1440px */
 @media (min-width: 1441px) {
+  .responsive-login {
+    max-width: 600px;
+    padding: 56px 56px 40px 56px;
+  }
+  .login-title {
+    font-size: 2.4rem;
+  }
   body {
     background-image: url('../images/site/checkerboard.jpg');
     background-repeat: repeat;

@@ -1,3 +1,5 @@
+#
+# See functional requirements: scripts/documentation/Format_requirements.md
 # Format.ps1
 # Wrapper script to run 'pnpm run format' from the project root
 
