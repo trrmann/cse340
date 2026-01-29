@@ -6,3 +6,7 @@
 - Accepts optional parameters for database host and port (defaults: localhost, 5432).
 - Outputs success or error messages based on the result.
 - Exits with code 0 if the connection succeeds, 1 if it fails.
+
+## SSL Handling
+
+- The script must test connectivity using the same SSL settings as the application: SSL enabled for remote databases, disabled for localhost.

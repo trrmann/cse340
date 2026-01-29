@@ -1,3 +1,9 @@
+## Database Connectivity Note
+
+- The application must support connecting to both local and remote PostgreSQL databases.
+- When connecting to a remote database (i.e., DATABASE_URL does not contain "localhost"), SSL must be enabled with `rejectUnauthorized: false` to ensure compatibility with managed database providers (e.g., Render, Heroku).
+- When connecting to a local database, SSL should be disabled.
+
 # RemoteWorkflow.ps1 Functional Requirements
 
 **Reminder:** If any new permanent functionality is added to RemoteWorkflow.ps1, update this requirements file to reflect the changes.

@@ -12,6 +12,7 @@ async function buildLogin(req, res, next) {
       message: '',
     });
   } catch (error) {
+    console.error('Error in buildLogin:', error);
     next(error);
   }
 }

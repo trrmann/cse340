@@ -1,3 +1,13 @@
+## Error Logging
+
+- Controllers must log the actual error to the console before passing to the error handler, to aid in diagnosing issues in all environments (including production).
+
+## Database Connectivity Note
+
+- The application must support connecting to both local and remote PostgreSQL databases.
+- When connecting to a remote database (i.e., DATABASE_URL does not contain "localhost"), SSL must be enabled with `rejectUnauthorized: false` to ensure compatibility with managed database providers (e.g., Render, Heroku).
+- When connecting to a local database, SSL should be disabled.
+
 # DevWorkflow.ps1 Functional Requirements
 
 **Note:** This workflow will not perform a commit or push. All commit/push operations must be performed manually or by other scripts.
