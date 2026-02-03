@@ -1,0 +1,39 @@
+<div class="login-container responsive-login">
+    <% if (title) { %>
+        <h1 class="login-title"><%= title %></h1>
+    <% } %>
+
+    <% if (message) { %>
+        <p class="error-message"><%= message %></p>
+    <% } %>
+    <% if (errors && errors.length) { %>
+        <ul class="notice">
+        <% errors.forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+        </ul>
+    <% } %>
+
+    <form class="registration-form" method="post" action="/account/registration">
+
+        <label for="account_firstname">First name</label>
+        <input id="account_firstname" name="account_firstname" class="login-fname" type="text" autocomplete="given-name" required value="<%= account_firstname %>" />
+
+        <label for="account_lastname">Last name</label>
+        <input id="account_lastname" name="account_lastname" class="login-lname" type="text" autocomplete="family-name" required value="<%= account_lastname %>">
+
+        <label for="account_email">Email</label>
+        <input id="account_email" name="account_email" class="login-email" type="email" autocomplete="email" required placeholder="Enter a valid email address" value="<%= account_email %>">
+
+        <label for="account_password">Password</label>
+        <div class="password-group">
+            <span class="password-rules">There must be at least 12 characters, one must be a number, one must be a lowercase letter, one must be a capital letter, and one must be a non-alphanumeric character.</span>
+            <input id="account_password" name="account_password" class="login-password" type="password" autocomplete="current-password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+            <div class="show-password-row">
+                <span id="show-password" class="login-show-password">Show Password</span>
+            </div>
+        </div>
+
+        <button id="registrationButton" class="registration-button" type="submit">Register</button>
+    </form>
+</div>

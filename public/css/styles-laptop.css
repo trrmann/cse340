@@ -38,10 +38,29 @@
   }
 
   .delorean-upgrades-section .upgrade-card {
+    .registration-form {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 40px 32px;
+      background: var(--color-bg, #fff);
+      border: 1.5px solid var(--color-blue, #90cdf4);
+      border-radius: 16px;
+      box-shadow:
+        0 4px 24px rgba(144, 205, 244, 0.12),
+        0 1.5px 8px rgba(32, 80, 128, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
     flex: 1 1 220px;
     min-width: 220px;
     max-width: 100%;
     box-sizing: border-box;
+  }
+  .registration-form label {
+    font-weight: 600;
+    color: var(--color-blue-link, #143a6c);
+    margin-bottom: 4px;
   }
   .delorean-hero-overlay {
     min-width: 320px;
@@ -52,9 +71,23 @@
   .delorean-sections-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    .registration-form input[type='text'],
+    .registration-form input[type='email'],
+    .registration-form input[type='password'] {
+      padding: 10px 12px;
+      border: 1px solid var(--color-blue, #90cdf4);
+      border-radius: 8px;
+      font-size: 1em;
+      background: #f7fafc;
+      transition: border-color 0.2s;
+    }
     gap: 2rem;
     margin: 40px 0;
     align-items: start;
+  }
+  .registration-form input:focus {
+    outline: none;
+    border-color: var(--color-blue-dark, #205080);
   }
   .delorian-upgrades-section {
     grid-column: 1;
@@ -69,9 +102,27 @@
     box-sizing: border-box;
   }
   /* Ensure each section takes up half the width */
+  .registration-button {
+    background: var(--color-blue-link, #143a6c);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    transition:
+      background 0.2s,
+      box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(32, 80, 128, 0.08);
+  }
   /* ...existing code... */
   .delorian-upgrades-grid {
     display: grid;
+    .registration-button:hover {
+      background: var(--color-blue-dark, #205080);
+    }
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
     width: 100%;

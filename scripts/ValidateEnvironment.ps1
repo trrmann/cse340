@@ -96,10 +96,12 @@ if ($Environment -eq "production") {
     
     if ($exists -and $hasProductionLocalToken) {
         Write-Host "    └─ Contains BACKEND_API_TOKEN for local proxy testing" -ForegroundColor Green
-    } elseif ($exists) {
+    }
+    elseif ($exists) {
         Write-Host "    └─ File exists but missing BACKEND_API_TOKEN" -ForegroundColor Yellow
         $warnings += "Create BACKEND_API_TOKEN in .env.production.local for local testing"
-    } else {
+    }
+    else {
         $warnings += "Optional: Create src/.env.production.local with BACKEND_API_TOKEN for local proxy testing"
     }
 }
@@ -133,7 +135,8 @@ if ($envFileToCheck) {
             $allValid = $false
         }
     }
-} else {
+}
+else {
     Write-Host "  [FAIL] No environment file found to validate keys" -ForegroundColor Red
     $allValid = $false
 }
@@ -153,7 +156,8 @@ if ($allValid) {
     
     Write-Host "========================================`n" -ForegroundColor Cyan
     exit 0
-} else {
+}
+else {
     Write-Host "Validation Result: FAILED" -ForegroundColor Red
     Write-Host "========================================`n" -ForegroundColor Cyan
     

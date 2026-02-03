@@ -28,11 +28,30 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+    .registration-form {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      background: var(--color-bg, #fff);
+      border: 1.5px solid var(--color-blue, #90cdf4);
+      border-radius: 16px;
+      box-shadow:
+        0 4px 24px rgba(144, 205, 244, 0.12),
+        0 1.5px 8px rgba(32, 80, 128, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
     margin: 24px 0 0 0;
     align-items: stretch;
   }
   .delorean-reviews-section {
     order: 1;
+    .registration-form label {
+      font-weight: 600;
+      color: var(--color-blue-link, #143a6c);
+      margin-bottom: 4px;
+    }
   }
   .delorian-upgrades-section {
     order: 2;
@@ -42,9 +61,23 @@
   }
   .flux-capacitor-card-outer,
   .flame-decals-card-outer,
+  .registration-form input[type='text'],
+  .registration-form input[type='email'],
+  .registration-form input[type='password'] {
+    padding: 10px 12px;
+    border: 1px solid var(--color-blue, #90cdf4);
+    border-radius: 8px;
+    font-size: 1em;
+    background: #f7fafc;
+    transition: border-color 0.2s;
+  }
   .bumper-stickers-card-outer,
   .hub-caps-card-outer {
     width: 180px;
+  }
+  .registration-form input:focus {
+    outline: none;
+    border-color: var(--color-blue-dark, #205080);
   }
   .flux-capacitor-card,
   .flame-decals-card,
@@ -59,9 +92,27 @@
   #tools {
     font-size: calc(var(--font-size-large) * 0.95);
   }
+  .registration-button {
+    background: var(--color-blue-link, #143a6c);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    transition:
+      background 0.2s,
+      box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(32, 80, 128, 0.08);
+  }
 
   /* Inventory Display - Tablet View */
   #inv-display {
+    .registration-button:hover {
+      background: var(--color-blue-dark, #205080);
+    }
     grid-template-columns: repeat(2, 1fr);
     gap: 28px;
     margin: 28px 0;
