@@ -13,7 +13,7 @@ router.get('/', invController.buildManagement);
 router.post(
   '/add-classification',
   invValidation.classificationRules(),
-  invValidation.checkClassificationValidation,
+  invValidation.checkValidation('/inv/'),
   invController.addClassification
 );
 
@@ -21,8 +21,7 @@ router.post(
 router.post(
   '/add-inventory',
   invValidation.inventoryRules(),
-  invValidation.checkInventoryValidation,
-  invValidation.checkInventoryValidation,
+  invValidation.checkValidation('/inv/'),
   invController.addInventory
 );
 
