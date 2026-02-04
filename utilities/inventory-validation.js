@@ -33,22 +33,6 @@ validate.inventoryRules = () => [
     .withMessage('Classification is required.'),
 ];
 
-// Middleware to check validation results
-validate.checkValidation = (redirectPath) => (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    req.flash(
-      'notice',
-      errors
-        .array()
-        .map((e) => e.msg)
-        .join(' ')
-    );
-    return res.redirect(redirectPath);
-  }
-  next();
-};
-
 // Middleware to check validation results for add-inventory
 validate.checkInventoryValidation = async (req, res, next) => {
   const errors = validationResult(req);
@@ -78,9 +62,6 @@ validate.checkInventoryValidation = async (req, res, next) => {
 
 // Middleware to check validation results for add-classification
 validate.checkClassificationValidation = async (req, res, next) => {
-  console.log('checkClassificationValidation called');
-  console.log('Body:', req.body);
-  console.log('Validation errors:', req.errors);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const nav = await require('../utilities').getNav();
