@@ -10,10 +10,15 @@ invCont.buildManagement = async function (req, res, next) {
   try {
     const nav = await utilities.getNav();
     const classifications = await invModel.getClassifications();
+    console.log('buildManagement classifications:', classifications);
+    console.log(
+      'buildManagement classifications.rows:',
+      classifications && classifications.rows
+    );
     res.render('./inventory/management', {
       title: 'Inventory Management',
       nav,
-      classifications: classifications.rows,
+      classifications: classifications && classifications.rows,
       message: req.flash('notice'),
       errors: null,
     });
@@ -29,18 +34,26 @@ invCont.addClassification = async function (req, res, next) {
   try {
     result = await invModel.insertClassification(classification_name);
   } catch (error) {
-    // Always treat DB errors as form errors, not 500s
     result = { error: error.message || 'Database error.' };
   }
   if (result && !result.error) {
     req.flash('notice', 'Classification added successfully.');
     return res.redirect('/inv/');
   } else {
-    // On DB error, re-render form with error (as validation error)
+    // On error, re-render management view with error and sticky input
     const nav = await utilities.getNav();
-    res.render('./inventory/add-classification', {
-      title: 'Add Classification',
+    const classifications = await invModel.getClassifications();
+    // Diagnostic log to surface real values passed to the view
+    console.log('addClassification render:', {
       nav,
+      classifications: classifications && classifications.rows,
+      errors: [{ msg: result.error || 'Failed to add classification.' }],
+      classification_name,
+    });
+    res.render('./inventory/management', {
+      title: 'Inventory Management',
+      nav,
+      classifications: classifications.rows,
       message: null,
       errors: [{ msg: result.error || 'Failed to add classification.' }],
       classification_name,
@@ -58,17 +71,16 @@ invCont.addInventory = async function (req, res, next) {
       req.flash('notice', 'Inventory item added successfully.');
       return res.redirect('/inv/');
     } else {
-      // On DB error, re-render form with error
+      // On DB error, re-render management view with error and sticky input
       let nav = await utilities.getNav();
-      const classificationList = await utilities.buildClassificationList(
-        item.classification_id
-      );
-      res.render('./inventory/add-inventory', {
-        title: 'Add Inventory Item',
+      const classifications = await invModel.getClassifications();
+      res.render('./inventory/management', {
+        layout: './layouts/layout',
+        title: 'Inventory Management',
         nav,
-        message: result.error || 'Failed to add inventory item.',
-        errors: result.errors || [],
-        classificationList,
+        classifications: classifications.rows,
+        message: null,
+        errors: [{ msg: result.error || 'Failed to add inventory item.' }],
         ...item,
       });
     }

@@ -41,6 +41,13 @@ app.use(
     name: 'sessionId',
   })
 );
+
+// Top-level logging middleware to confirm request receipt
+app.use((req, res, next) => {
+  console.log(`[LOG] ${req.method} ${req.originalUrl}`);
+  next();
+});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 

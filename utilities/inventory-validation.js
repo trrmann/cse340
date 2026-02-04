@@ -49,58 +49,91 @@ validate.checkValidation = (redirectPath) => (req, res, next) => {
   next();
 };
 
-module.exports = validate;
 // Middleware to check validation results for add-inventory
 validate.checkInventoryValidation = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const nav = await require('../utilities').getNav();
-    const classificationList =
-      await require('../utilities').buildClassificationList(
-        req.body.classification_id
-      );
-    return res.render('./inventory/add-inventory', {
-      title: 'Add Inventory Item',
+    const classifications =
+      await require('../models/inventory-model').getClassifications();
+    req.flash(
+      'notice',
+      errors
+        .array()
+        .map((e) => e.msg)
+        .join(' ')
+    );
+    return res.render('./inventory/management', {
+      layout: './layouts/layout',
+      title: 'Inventory Management',
       nav,
-      message: null,
+      classifications: classifications.rows,
+      message: req.flash('notice'),
       errors: errors.array(),
-      classificationList,
       ...req.body,
     });
   }
   next();
 };
-// Middleware to check validation results for add-inventory
-validate.checkInventoryValidation = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    const nav = await require('../utilities').getNav();
-    const classificationList =
-      await require('../utilities').buildClassificationList(
-        req.body.classification_id
-      );
-    return res.render('./inventory/add-inventory', {
-      title: 'Add Inventory Item',
-      nav,
-      message: null,
-      errors: errors.array(),
-      classificationList,
-      ...req.body,
-    });
-  }
-  next();
-};
+
 // Middleware to check validation results for add-classification
 validate.checkClassificationValidation = async (req, res, next) => {
+  console.log('checkClassificationValidation called');
+  console.log('Body:', req.body);
+  console.log('Validation errors:', req.errors);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const nav = await require('../utilities').getNav();
-    return res.render('./inventory/add-classification', {
-      title: 'Add Classification',
+    const classifications =
+      await require('../models/inventory-model').getClassifications();
+    req.flash(
+      'notice',
+      errors
+        .array()
+        .map((e) => e.msg)
+        .join(' ')
+    );
+    return res.render('./inventory/management', {
+      layout: './layouts/layout',
+      title: 'Inventory Management',
       nav,
-      message: null,
+      classifications: classifications.rows,
+      message: req.flash('notice'),
       errors: errors.array(),
       classification_name: req.body.classification_name || '',
+      ...req.body,
+    });
+  }
+  next();
+};
+
+module.exports = validate;
+// Middleware to check validation results for add-classification
+validate.checkClassificationValidation = async (req, res, next) => {
+  console.log('checkClassificationValidation called');
+  console.log('Body:', req.body);
+  console.log('Validation errors:', req.errors);
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const nav = await require('../utilities').getNav();
+    const classifications =
+      await require('../models/inventory-model').getClassifications();
+    req.flash(
+      'notice',
+      errors
+        .array()
+        .map((e) => e.msg)
+        .join(' ')
+    );
+    return res.render('./inventory/management', {
+      layout: './layouts/layout',
+      title: 'Inventory Management',
+      nav,
+      classifications: classifications.rows,
+      message: req.flash('notice'),
+      errors: errors.array(),
+      classification_name: req.body.classification_name || '',
+      ...req.body,
     });
   }
   next();

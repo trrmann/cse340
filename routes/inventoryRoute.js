@@ -22,7 +22,6 @@ router.post(
   '/add-inventory',
   invValidation.inventoryRules(),
   invValidation.checkInventoryValidation,
-  invValidation.checkInventoryValidation,
   invController.addInventory
 );
 
