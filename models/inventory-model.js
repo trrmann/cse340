@@ -21,7 +21,9 @@ async function getInventoryByClassificationId(classification_id) {
     );
     return data.rows;
   } catch (error) {
-    console.error('getclassificationsbyid error ' + error);
+    return {
+      error: 'Failed to retrieve inventory by classification. ' + error.message,
+    };
   }
 }
 
@@ -35,7 +37,46 @@ async function getInventoryByInvId(inv_id) {
     );
     return data.rows;
   } catch (error) {
-    console.error('getitemdetailbyid error ' + error);
+    return { error: 'Failed to retrieve inventory item. ' + error.message };
+  }
+}
+
+// Insert a new classification (letters/numbers only)
+async function insertClassification(classification_name) {
+  try {
+    const sql =
+      'INSERT INTO public.classification (classification_name) VALUES ($1) RETURNING *';
+    const result = await pool.query(sql, [classification_name]);
+    return result.rows[0];
+  } catch (error) {
+    return { error: 'Failed to insert classification. ' + error.message };
+  }
+}
+
+// Insert a new inventory item
+async function insertInventory(item) {
+  try {
+    const sql = `INSERT INTO public.inventory
+      (inv_vin, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      RETURNING *`;
+    const values = [
+      item.inv_vin,
+      item.inv_make,
+      item.inv_model,
+      item.inv_year,
+      item.inv_description,
+      item.inv_image || 'No Image Available',
+      item.inv_thumbnail || 'No Image Available',
+      item.inv_price ?? 0,
+      item.inv_miles ?? null,
+      item.inv_color ?? null,
+      item.classification_id,
+    ];
+    const result = await pool.query(sql, values);
+    return result.rows[0];
+  } catch (error) {
+    return { error: 'Failed to insert inventory item. ' + error.message };
   }
 }
 
@@ -43,4 +84,6 @@ module.exports = {
   getClassifications,
   getInventoryByClassificationId,
   getInventoryByInvId,
+  insertClassification,
+  insertInventory,
 };

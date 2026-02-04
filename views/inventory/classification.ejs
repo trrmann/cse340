@@ -6,7 +6,16 @@
 } %>
 
 <!-- Message block -->
-<%# messages() %>
+<% if (message && message.length) { %>
+    <div class="notice"><%= message %></div>
+<% } %>
+<% if (errors && errors.length) { %>
+    <ul class="errors">
+        <% errors.forEach(function(error) { %>
+            <li><%= error.msg %></li>
+        <% }); %>
+    </ul>
+<% } %>
 
 <!-- Inventory Display Items -->
 <%- grid %>

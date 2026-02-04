@@ -5,6 +5,58 @@ const utilities = require('../utilities/');
 
 const invCont = {};
 
+// Renders the management view for inventory (GET /inv/)
+invCont.buildManagement = async function (req, res, next) {
+  try {
+    const nav = await utilities.getNav();
+    const classifications = await invModel.getClassifications();
+    res.render('./inventory/management', {
+      title: 'Inventory Management',
+      nav,
+      classifications: classifications.rows,
+      message: req.flash('notice'),
+      errors: null,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Handles POST to add a new classification
+invCont.addClassification = async function (req, res, next) {
+  try {
+    const { classification_name } = req.body;
+    const result = await invModel.insertClassification(classification_name);
+    if (result && !result.error) {
+      req.flash('notice', 'Classification added successfully.');
+      // Optionally, update nav in session or force reload
+      return res.redirect('/inv/');
+    } else {
+      req.flash('notice', result.error || 'Failed to add classification.');
+      return res.redirect('/inv/');
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Handles POST to add a new inventory item
+invCont.addInventory = async function (req, res, next) {
+  try {
+    const item = req.body;
+    const result = await invModel.insertInventory(item);
+    if (result && !result.error) {
+      req.flash('notice', 'Inventory item added successfully.');
+      return res.redirect('/inv/');
+    } else {
+      req.flash('notice', result.error || 'Failed to add inventory item.');
+      return res.redirect('/inv/');
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Renders all vehicles in a classification as a grid view.
 invCont.buildByClassificationId = async function (req, res, next) {
   try {

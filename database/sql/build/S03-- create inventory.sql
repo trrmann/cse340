@@ -7,11 +7,11 @@ CREATE TABLE IF NOT EXISTS PUBLIC.inventory (
 	inv_description TEXT NOT NULL,
 	inv_image CHARACTER VARYING NOT NULL,
 	inv_thumbnail CHARACTER VARYING NOT NULL,
-	inv_price NUMERIC(9,0) NOT NULL,
+	 inv_price NUMERIC(9,0) NOT NULL,
 	inv_miles INTEGER NOT NULL,
 	inv_color CHARACTER VARYING NOT NULL,
 	classification_id INTEGER NOT NULL,
-	CONSTRAINT inventory_pk PRIMARY KEY (inv_id)
+	 CONSTRAINT inventory_pk PRIMARY KEY (inv_id)
 );
 -- Create relationship between 'classification' and 'inventory' tables
 ALTER TABLE IF EXISTS PUBLIC.inventory

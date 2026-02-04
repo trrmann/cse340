@@ -1,7 +1,25 @@
-// Utility functions for navigation, grid, and item detail HTML generation.
-
-const invModel = require('../models/inventory-model');
 const Util = {};
+const invModel = require('../models/inventory-model');
+// Returns a select list of classifications for inventory forms.
+Util.buildClassificationList = async function (classification_id = null) {
+  let data = await invModel.getClassifications();
+  let classificationList =
+    '<select name="classification_id" id="classificationList" required>';
+  classificationList += "<option value=''>Choose a Classification</option>";
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"';
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ) {
+      classificationList += ' selected ';
+    }
+    classificationList += '>' + row.classification_name + '</option>';
+  });
+  classificationList += '</select>';
+  return classificationList;
+};
+// Utility functions for navigation, grid, and item detail HTML generation.
 
 // Returns navigation HTML as an unordered list.
 Util.getNav = async function (req, res, next) {
