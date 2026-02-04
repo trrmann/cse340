@@ -41,6 +41,7 @@ invCont.addClassification = async function (req, res, next) {
 };
 
 // Handles POST to add a new inventory item
+// Handles POST to add a new inventory item with sticky form and error display
 invCont.addInventory = async function (req, res, next) {
   try {
     const item = req.body;
@@ -49,8 +50,21 @@ invCont.addInventory = async function (req, res, next) {
       req.flash('notice', 'Inventory item added successfully.');
       return res.redirect('/inv/');
     } else {
-      req.flash('notice', result.error || 'Failed to add inventory item.');
-      return res.redirect('/inv/');
+      // On error, re-render the form with sticky data and error messages
+      let nav = await utilities.getNav();
+      // Build the classification select list with the selected value
+      const classificationList = await utilities.buildClassificationList(
+        item.classification_id
+      );
+      // Pass all form fields back to the view for sticky behavior
+      res.render('./inventory/add-inventory', {
+        title: 'Add Inventory Item',
+        nav,
+        message: result.error || 'Failed to add inventory item.',
+        errors: result.errors || [],
+        classificationList,
+        ...item, // Spread all form fields for sticky values
+      });
     }
   } catch (error) {
     next(error);
