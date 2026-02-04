@@ -24,27 +24,25 @@ invCont.buildManagement = async function (req, res, next) {
 
 // Handles POST to add a new classification
 invCont.addClassification = async function (req, res, next) {
-  const { classification_name } = req.body;
-  let result;
   try {
-    result = await invModel.insertClassification(classification_name);
+    const { classification_name } = req.body;
+    const result = await invModel.insertClassification(classification_name);
+    if (result && !result.error) {
+      req.flash('notice', 'Classification added successfully.');
+      return res.redirect('/inv/');
+    } else {
+      // On DB error, re-render form with error
+      const nav = await utilities.getNav();
+      res.render('./inventory/add-classification', {
+        title: 'Add Classification',
+        nav,
+        message: result.error || 'Failed to add classification.',
+        errors: [],
+        classification_name,
+      });
+    }
   } catch (error) {
-    // Always treat DB errors as form errors, not 500s
-    result = { error: error.message || 'Database error.' };
-  }
-  if (result && !result.error) {
-    req.flash('notice', 'Classification added successfully.');
-    return res.redirect('/inv/');
-  } else {
-    // On DB error, re-render form with error (as validation error)
-    const nav = await utilities.getNav();
-    res.render('./inventory/add-classification', {
-      title: 'Add Classification',
-      nav,
-      message: null,
-      errors: [{ msg: result.error || 'Failed to add classification.' }],
-      classification_name,
-    });
+    next(error);
   }
 };
 
