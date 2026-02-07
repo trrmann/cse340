@@ -8,13 +8,13 @@
     <% } %>
 
     <form class="login-form" method="post" action="/account/login">
-        <label for="email">Email</label>
-        <input id="email" name="email" class="login-email" type="email" autocomplete="email" required>
+        <label for="account_email">Email</label>
+        <input id="account_email" name="account_email" class="login-email" type="email" autocomplete="email" required>
 
-        <label for="password">Password</label>
+        <label for="account_password">Password</label>
         <div class="password-group">
             <span class="password-rules">There must be at least 12 characters, one must be a number, one must be a lowercase letter, one must be a capital letter, and one must be a non-alphanumeric character.</span>
-            <input id="password" name="password" class="login-password" type="password" autocomplete="current-password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+            <input id="account_password" name="account_password" class="login-password" type="password" autocomplete="current-password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
             <div class="show-password-row">
                 <span id="show-password-login" class="login-show-password">Show Password</span>
             </div>

@@ -24,4 +24,15 @@ router.post(
 // GET /account - show login page
 router.get('/', accountController.buildLogin);
 
+// POST /account/login - process login
+router.post(
+  '/login',
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.accountLogin)
+);
+
+// GET /account - show login page
+router.get('/management', accountController.buildAccount);
+
 module.exports = router;

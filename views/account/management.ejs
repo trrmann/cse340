@@ -1,0 +1,12 @@
+<div class="account-container responsive-account">
+    <% if (title) { %>
+        <h1 class="account-title"><%= title %></h1>
+    <% } %>
+
+    <% if (message && message.length > 0) { %>
+        <div class="flash-message"><%= message[0] %></div>
+    <% } %>
+
+    <p class="account-info">You're logged in!</p>
+
+</div>
