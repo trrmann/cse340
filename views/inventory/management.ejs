@@ -39,6 +39,7 @@
       <input type="text" id="inv_color" name="inv_color" value="<%= typeof inv_color !== 'undefined' ? inv_color : '' %>">
       <label for="classification_id">Classification:</label>
       <select id="classification_id" name="classification_id" required>
+        <option value="">Choose a Classification</option>
         <% classifications.forEach(function(classification) { %>
           <option value="<%= classification.classification_id %>" <%= typeof classification_id !== 'undefined' && classification_id == classification.classification_id ? 'selected' : '' %>><%= classification.classification_name %></option>
         <% }); %>
@@ -49,17 +50,25 @@
 
   <section>
     <h2>Manage Inventory</h2>
-    <label for="classificationList">Classification:</label>
-    <select name="classification_id" id="classificationList" required>
-      <option value=''>Choose a Classification</option>
-      <% classifications.forEach(function(classification) { %>
-        <option value="<%= classification.classification_id %>">
-          <%= classification.classification_name %>
-        </option>
-      <% }); %>
-    </select>
-    <table id="inventoryDisplay" role="presentation" aria-hidden="true"></table>
-    <noscript>JavaScript must be enabled to use this page.</noscript>
+    <form id="inventory-filter-form" action="#" method="get" style="margin-bottom: 1em;">
+      <label for="classificationList">Classification:</label>
+      <select name="classification_id" id="classificationList" required>
+        <option value=''>Choose a Classification</option>
+        <% classifications.forEach(function(classification) { %>
+          <option value="<%= classification.classification_id %>">
+            <%= classification.classification_name %>
+          </option>
+        <% }); %>
+      </select>
+    </form>
+    <noscript>
+      <div class="noscript-message" style="color: #c53030; background: #fff5f5; padding: 16px; border-radius: 8px; font-weight: bold;">
+        JavaScript must be enabled to use this page.
+      </div>
+    </noscript>
+    <table id="inventoryDisplay" role="presentation" aria-hidden="true">
+      <caption class="visually-hidden">Inventory display table is for layout only and is hidden from assistive technology.</caption>
+    </table>
     <script src="../../js/inventory.js"></script>
   </section>
-</main>
+

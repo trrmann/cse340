@@ -1,3 +1,21 @@
+/* Visually hidden utility class for accessibility (hides visually, available to screen readers) */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+.registration-button:disabled {
+  background: #7a7a7a;
+  color: #fff;
+  opacity: 1;
+  cursor: not-allowed;
+}
 /* Ensure login-form text input matches registration-form for all states */
 .login-form input[type='text'] {
   padding: 12px 14px;
