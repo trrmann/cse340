@@ -1,5 +1,5 @@
 
-<main>
+<!-- main removed: handled by layout.ejs -->
   <h1>Inventory Management</h1>
   <% if (message && message.length) { %>
     <div class="notice"><%= message %></div>
@@ -49,6 +49,7 @@
 
   <section>
     <h2>Manage Inventory</h2>
+    <label for="classificationList">Classification:</label>
     <select name="classification_id" id="classificationList" required>
       <option value=''>Choose a Classification</option>
       <% classifications.forEach(function(classification) { %>
@@ -57,7 +58,7 @@
         </option>
       <% }); %>
     </select>
-    <table id="inventoryDisplay"></table>
+    <table id="inventoryDisplay" role="presentation" aria-hidden="true"></table>
     <noscript>JavaScript must be enabled to use this page.</noscript>
     <script src="../../js/inventory.js"></script>
   </section>

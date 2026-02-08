@@ -131,32 +131,32 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
-    .registration-form {
-      max-width: 540px;
-      margin: 0 auto;
-      padding: 56px 40px 40px 40px;
-      background: var(--color-bg, #fff);
-      border: 2px solid var(--color-blue, #90cdf4);
-      border-radius: 24px;
-      box-shadow:
-        0 4px 32px rgba(144, 205, 244, 0.14),
-        0 2px 12px rgba(32, 80, 128, 0.1);
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-    }
     gap: 80px;
     margin: 56px 0;
     align-items: start;
   }
+  .delorean-sections-container .registration-form {
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 56px 40px 40px 40px;
+    background: var(--color-bg, #fff);
+    border: 2px solid var(--color-blue, #90cdf4);
+    border-radius: 24px;
+    box-shadow:
+      0 4px 32px rgba(144, 205, 244, 0.14),
+      0 2px 12px rgba(32, 80, 128, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
   .delorian-upgrades-section {
-    .registration-form label {
-      font-weight: 600;
-      color: var(--color-blue-link, #143a6c);
-      margin-bottom: 4px;
-    }
     grid-column: 1;
     order: 1;
+  }
+  .delorian-upgrades-section .registration-form label {
+    font-weight: 600;
+    color: var(--color-blue-link, #143a6c);
+    margin-bottom: 4px;
   }
   .delorean-reviews-section {
     grid-column: 2;
@@ -164,16 +164,16 @@
   }
   .delorian-upgrades-grid {
     gap: 80px;
-    .registration-form input[type='text'],
-    .registration-form input[type='email'],
-    .registration-form input[type='password'] {
-      padding: 12px 14px;
-      border: 1.5px solid var(--color-blue, #90cdf4);
-      border-radius: 10px;
-      font-size: 1.1em;
-      background: #f7fafc;
-      transition: border-color 0.2s;
-    }
+  }
+  .delorian-upgrades-grid .registration-form input[type='text'],
+  .delorian-upgrades-grid .registration-form input[type='email'],
+  .delorian-upgrades-grid .registration-form input[type='password'] {
+    padding: 12px 14px;
+    border: 1.5px solid var(--color-blue, #90cdf4);
+    border-radius: 10px;
+    font-size: 1.1em;
+    background: #f7fafc;
+    transition: border-color 0.2s;
   }
   .flux-capacitor-card-outer,
   .flame-decals-card-outer,
