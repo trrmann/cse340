@@ -114,12 +114,6 @@
   .delorian-upgrades-grid .registration-button:hover {
     background: var(--color-blue-dark, #205080);
   }
-
-  border: 1px solid var(--color-blue, #90cdf4);
-  border-radius: 8px;
-  font-size: 1em;
-  background: #f7fafc;
-  transition: border-color 0.2s;
 }
 
 .registration-form input:focus {
