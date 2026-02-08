@@ -1,3 +1,17 @@
+/* High contrast for show password button */
+.login-show-password {
+  font-size: 1em;
+  color: #205080;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0 4px;
+  transition: color 0.2s;
+  text-align: right;
+}
+.login-show-password:hover {
+  color: #143a6c;
+}
 /* Visually hidden utility class for accessibility (hides visually, available to screen readers) */
 .visually-hidden {
   position: absolute !important;
