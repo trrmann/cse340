@@ -54,5 +54,16 @@ router.post(
   invValidation.checkUpdateData,
   utilities.handleErrors(invController.invCont.updateInventory)
 );
+// NOT NEGOTIABLE MANDATORY REQUIREMENT: Delete Inventory GET route (confirmation step)
+router.get(
+  '/delete/:inv_id',
+  utilities.handleErrors(invController.invCont.buildDeleteInventory)
+);
+
+// NOT NEGOTIABLE MANDATORY REQUIREMENT: Delete Inventory POST route (actual delete)
+router.post(
+  '/delete',
+  utilities.handleErrors(invController.invCont.deleteInventory)
+);
 
 module.exports = router;

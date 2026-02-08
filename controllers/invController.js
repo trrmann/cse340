@@ -274,6 +274,45 @@ invCont.editInventory = async function (req, res, next) {
     next(error);
   }
 };
+// NOT NEGOTIABLE MANDATORY REQUIREMENT: Build and deliver the delete confirmation view
+invCont.buildDeleteInventory = async function (req, res, next) {
+  try {
+    const inv_id = parseInt(req.params.inv_id);
+    const nav = await utilities.getNav();
+    const itemData = (await invModel.getInventoryByInvId(inv_id))[0];
+    const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
+    res.render('./inventory/delete-confirm', {
+      title: 'Delete ' + itemName,
+      nav,
+      errors: null,
+      message: null,
+      inv_id: itemData.inv_id,
+      inv_make: itemData.inv_make,
+      inv_model: itemData.inv_model,
+      inv_year: itemData.inv_year,
+      inv_price: itemData.inv_price,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// NOT NEGOTIABLE MANDATORY REQUIREMENT: Carry out the delete process
+invCont.deleteInventory = async function (req, res, next) {
+  try {
+    const inv_id = parseInt(req.body.inv_id);
+    const result = await invModel.deleteInventory(inv_id);
+    if (result && !result.error) {
+      req.flash('notice', 'Inventory item deleted successfully.');
+      return res.redirect('/inv/');
+    } else {
+      req.flash('notice', result.error || 'Failed to delete inventory item.');
+      return res.redirect(`/inv/delete/${inv_id}`);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
   invCont,

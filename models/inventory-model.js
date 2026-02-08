@@ -1,3 +1,20 @@
+/* ***************************
+ *  Delete Inventory Item
+ * ************************** */
+async function deleteInventory(inv_id) {
+  try {
+    const sql = 'DELETE FROM public.inventory WHERE inv_id = $1';
+    const data = await pool.query(sql, [inv_id]);
+    // If rowCount is 1, delete was successful
+    if (data.rowCount === 1) {
+      return { success: true };
+    } else {
+      return { error: 'Delete failed or item not found.' };
+    }
+  } catch (error) {
+    return { error: 'Delete Inventory Error: ' + error.message };
+  }
+}
 // Inventory Model: Handles database queries for vehicle inventory and classifications.
 
 const pool = require('../database/');
@@ -123,4 +140,5 @@ module.exports = {
   insertClassification,
   insertInventory,
   updateInventory,
+  deleteInventory, // NOT NEGOTIABLE MANDATORY REQUIREMENT
 };
