@@ -9,16 +9,13 @@ const invCont = {};
 invCont.buildManagement = async function (req, res, next) {
   try {
     const nav = await utilities.getNav();
+    const classificationsSelect = await utilities.buildClassificationList();
     const classifications = await invModel.getClassifications();
-    console.log('buildManagement classifications:', classifications);
-    console.log(
-      'buildManagement classifications.rows:',
-      classifications && classifications.rows
-    );
     res.render('./inventory/management', {
       title: 'Inventory Management',
       nav,
       classifications: classifications && classifications.rows,
+      classificationsSelect,
       message: req.flash('notice'),
       errors: null,
     });
@@ -61,7 +58,6 @@ invCont.addClassification = async function (req, res, next) {
   }
 };
 
-// Handles POST to add a new inventory item
 // Handles POST to add a new inventory item with sticky form and error display
 invCont.addInventory = async function (req, res, next) {
   try {
@@ -144,4 +140,141 @@ invCont.buildByInvId = async function (req, res, next) {
   }
 };
 
-module.exports = invCont;
+/* ***************************
+ *  Return Inventory by Classification As JSON
+ * ************************** */
+invCont.getInventoryJSON = async (req, res, next) => {
+  const classification_id = parseInt(req.params.classification_id);
+  const invData =
+    await invModel.getInventoryByClassificationId(classification_id);
+  if (invData[0].inv_id) {
+    return res.json(invData);
+  } else {
+    next(new Error('No data returned'));
+  }
+};
+
+// Handles POST to update an inventory item with sticky form and error display
+invCont.updateInventory = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+  const updateResult = await invModel.updateInventory(
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id
+  );
+
+  if (updateResult) {
+    const itemName = updateResult.inv_make + ' ' + updateResult.inv_model;
+    req.flash('notice', `The ${itemName} was successfully updated.`);
+    res.redirect('/inv/');
+  } else {
+    const classificationSelect =
+      await utilities.buildClassificationList(classification_id);
+    const itemName = `${inv_make} ${inv_model}`;
+    req.flash('notice', 'Sorry, the insert failed.');
+    res.status(501).render('inventory/edit-inventory', {
+      title: 'Edit ' + itemName,
+      nav,
+      classificationSelect: classificationSelect,
+      errors: null,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+    });
+  }
+};
+
+// Display the edit inventory item view
+invCont.buildEditInventory = async (req, res, next) => {
+  try {
+    const inv_id = parseInt(req.params.inventory_id);
+    let nav = await utilities.getNav();
+    const itemData = (await invModel.getInventoryByInvId(inv_id))[0];
+    const classificationList = await utilities.buildClassificationList(
+      itemData.classification_id
+    );
+    const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
+    res.render('./inventory/edit-inventory', {
+      title: 'Edit ' + itemName,
+      nav,
+      classificationList: classificationList,
+      errors: null,
+      message: null,
+      inv_id: itemData.inv_id,
+      inv_vin: itemData.inv_vin,
+      inv_make: itemData.inv_make,
+      inv_model: itemData.inv_model,
+      inv_year: itemData.inv_year,
+      inv_description: itemData.inv_description,
+      inv_image: itemData.inv_image,
+      inv_thumbnail: itemData.inv_thumbnail,
+      inv_price: itemData.inv_price,
+      inv_miles: itemData.inv_miles,
+      inv_color: itemData.inv_color,
+      classification_id: itemData.classification_id,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Handles POST to edit an inventory item with sticky form and error display
+invCont.editInventory = async function (req, res, next) {
+  try {
+    const inventory_id = parseInt(req.params.inventory_id, 10);
+    const item = req.body;
+    const result = await invModel.insertInventory(item);
+    if (result && !result.error) {
+      req.flash('notice', 'Inventory item edited successfully.');
+      return res.redirect('/inv/');
+    } else {
+      // On DB error, re-render management view with error and sticky input
+      let nav = await utilities.getNav();
+      const classifications = await invModel.getClassifications();
+      res.render('./inventory/management', {
+        layout: './layouts/layout',
+        title: 'Inventory Management',
+        nav,
+        classifications: classifications.rows,
+        message: null,
+        errors: [{ msg: result.error || 'Failed to edit inventory item.' }],
+        ...item,
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {
+  invCont,
+};

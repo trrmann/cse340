@@ -59,7 +59,7 @@
 }
 /* Login form input styles to match registration form */
 .registration-form {
-  max-width: 400px;
+  max-width: 600px;
   margin: 40px auto;
   padding: 32px 24px 24px 24px;
   background: var(--color-bg, #fff);

@@ -1,3 +1,12 @@
+/* Subdued style for disabled update inventory item button */
+.registration-form .registration-button:disabled {
+  background: #bfc5cc !important;
+  color: #7a7a7a !important;
+  border-color: #bfc5cc !important;
+  opacity: 0.7;
+  cursor: not-allowed;
+  box-shadow: none;
+}
 /* Ensure login-form text input matches registration-form for all states */
 .login-form input[type='text'] {
   padding: 10px 12px;

@@ -1,15 +1,12 @@
-
-<main>
   <% if (message && message.length) { %>
     <div class="notice"><%= message %></div>
   <% } %>
-    <ul class="errors">
-      <% errors.forEach(function(error) { %>
-        <li><%= error.msg %></li>
-      <% }); %>
-    </ul>
-  <% } %>
-  <form action="/inv/add-inventory" method="POST" id="addInventoryForm">
+  <ul class="errors">
+    <% errors && errors.forEach(function(error) { %>
+      <li><%= error.msg %></li>
+    <% }); %>
+  </ul>
+  <form action="/inv/update" method="POST" id="updateForm" class="registration-form">
     <label for="inv_vin">VIN:</label>
     <input type="text" id="inv_vin" name="inv_vin" required value="<%= typeof inv_vin !== 'undefined' ? inv_vin : '' %>">
     <label for="inv_make">Make:</label>
@@ -32,7 +29,9 @@
     <input type="text" id="inv_color" name="inv_color" value="<%= typeof inv_color !== 'undefined' ? inv_color : '' %>">
     <label for="classification_id">Classification:</label>
     <%- classificationList %>
-    <button type="submit">Add Inventory Item</button>
+    <button type="submit" class="registration-button" disabled>Update Inventory Item</button>
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
   </form>
-  <script src="/js/script.js"></script>
-</main>
+  <script src="/js/inv-update.js"></script>

@@ -34,7 +34,7 @@ validate.inventoryRules = () => [
 ];
 
 // Middleware to check validation results for add-inventory
-validate.checkInventoryValidation = async (req, res, next) => {
+validate.checkInventoryData = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const nav = await require('../utilities').getNav();
@@ -55,6 +55,49 @@ validate.checkInventoryValidation = async (req, res, next) => {
       message: req.flash('notice'),
       errors: errors.array(),
       ...req.body,
+    });
+  }
+  next();
+};
+
+// Middleware to check validation results for editing inventory items (errors go to edit view)
+validate.checkUpdateData = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const nav = await require('../utilities').getNav();
+    const classifications =
+      await require('../models/inventory-model').getClassifications();
+    req.flash(
+      'notice',
+      errors
+        .array()
+        .map((e) => e.msg)
+        .join(' ')
+    );
+    // Build the same title as the controller
+    const title =
+      'Edit ' + (req.body.inv_make || '') + ' ' + (req.body.inv_model || '');
+    return res.render('./inventory/edit-inventory', {
+      layout: './layouts/layout',
+      title,
+      nav,
+      classifications: classifications.rows,
+      message: req.flash('notice'),
+      errors: errors.array(),
+      inv_id: req.body.inv_id || '',
+      inv_make: req.body.inv_make || '',
+      inv_model: req.body.inv_model || '',
+      inv_year: req.body.inv_year || '',
+      inv_description: req.body.inv_description || '',
+      inv_image: req.body.inv_image || '',
+      inv_thumbnail: req.body.inv_thumbnail || '',
+      inv_price: req.body.inv_price || '',
+      inv_miles: req.body.inv_miles || '',
+      inv_color: req.body.inv_color || '',
+      classification_id: req.body.classification_id || '',
+      classificationList: await require('../utilities').buildClassificationList(
+        req.body.classification_id
+      ),
     });
   }
   next();
@@ -88,7 +131,6 @@ validate.checkClassificationValidation = async (req, res, next) => {
   next();
 };
 
-module.exports = validate;
 // Middleware to check validation results for add-classification
 validate.checkClassificationValidation = async (req, res, next) => {
   console.log('checkClassificationValidation called');
@@ -119,3 +161,36 @@ validate.checkClassificationValidation = async (req, res, next) => {
   }
   next();
 };
+
+// Middleware to check validation results for update-inventory
+validate.checkUpdateData = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const nav = await require('../utilities').getNav();
+    const classifications =
+      await require('../models/inventory-model').getClassifications();
+    // Build the same title as the controller
+    const title =
+      'Edit ' + (req.body.inv_make || '') + ' ' + (req.body.inv_model || '');
+    req.flash(
+      'notice',
+      errors
+        .array()
+        .map((e) => e.msg)
+        .join(' ')
+    );
+    return res.render('./inventory/edit-inventory', {
+      layout: './layouts/layout',
+      title,
+      nav,
+      classifications: classifications.rows,
+      message: req.flash('notice'),
+      errors: errors.array(),
+      inv_id: req.body.inv_id || '',
+      ...req.body,
+    });
+  }
+  next();
+};
+
+module.exports = validate;
