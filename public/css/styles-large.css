@@ -11,7 +11,7 @@
   border: 0 !important;
 }
 .registration-button:disabled {
-  background: #7a7a7a;
+  background: #205080;
   color: #fff;
   opacity: 1;
   cursor: not-allowed;
