@@ -38,328 +38,339 @@
   }
 
   .delorean-upgrades-section .upgrade-card {
-    .delorean-upgrades-section .upgrade-card .registration-form {
-      max-width: 400px;
-      margin: 40px auto;
-      padding: 32px 24px 24px 24px;
-      background: var(--color-bg, #fff);
-      border: 1.5px solid var(--color-blue, #90cdf4);
-      border-radius: 16px;
-      box-shadow:
-        0 4px 24px rgba(144, 205, 244, 0.12),
-        0 1.5px 8px rgba(32, 80, 128, 0.08);
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .delorean-upgrades-section .upgrade-card {
-      flex: 1 1 220px;
-      min-width: 220px;
-      max-width: 100%;
-      box-sizing: border-box;
-    }
-    .registration-form {
-      max-width: 400px;
-      margin: 40px auto;
-      padding: 32px 24px 24px 24px;
-      background: var(--color-bg, #fff);
-      border: 1.5px solid var(--color-blue, #90cdf4);
-      border-radius: 16px;
-      box-shadow:
-        0 4px 24px rgba(144, 205, 244, 0.12),
-        0 1.5px 8px rgba(32, 80, 128, 0.08);
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .registration-form label {
-      font-weight: 600;
-      color: var(--color-blue-link, #143a6c);
-      margin-bottom: 4px;
-    }
-    .registration-form input[type='text'],
-    .registration-form input[type='email'],
-    .registration-form input[type='password'] {
-      padding: 10px 12px;
-      border: 1px solid var(--color-blue, #90cdf4);
-      border-radius: 8px;
-      font-size: 1em;
-      background: #f7fafc;
-      transition: border-color 0.2s;
-    }
-    .registration-form input:focus {
-      outline: none;
-      border-color: var(--color-blue-dark, #205080);
-    }
-    .registration-form label {
-      font-weight: 600;
-      color: var(--color-blue-link, #143a6c);
-      margin-bottom: 4px;
-    }
-    .delorean-hero-overlay {
-      min-width: 320px;
-      min-height: 260px;
-      font-size: calc(var(--font-size-overlay) * 1.1);
-    }
+    flex: 1 1 220px;
+    min-width: 220px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 
-    .delorean-sections-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin: 40px 0;
-      align-items: start;
-    }
-    .delorean-sections-container .registration-form input[type='text'],
-    .delorian-upgrades-grid .registration-button:hover {
-      background: var(--color-blue-dark, #205080);
-    }
+  .delorean-upgrades-section .upgrade-card .registration-form {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 32px 24px 24px 24px;
+    background: var(--color-bg, #fff);
+    border: 1.5px solid var(--color-blue, #90cdf4);
+    border-radius: 16px;
+    box-shadow:
+      0 4px 24px rgba(144, 205, 244, 0.12),
+      0 1.5px 8px rgba(32, 80, 128, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .registration-form {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 32px 24px 24px 24px;
+    background: var(--color-bg, #fff);
+    border: 1.5px solid var(--color-blue, #90cdf4);
+    border-radius: 16px;
+    box-shadow:
+      0 4px 24px rgba(144, 205, 244, 0.12),
+      0 1.5px 8px rgba(32, 80, 128, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .registration-form label {
+    font-weight: 600;
+    color: var(--color-blue-link, #143a6c);
+    margin-bottom: 4px;
+  }
+
+  .registration-form input[type='text'],
+  .registration-form input[type='email'],
+  .registration-form input[type='password'] {
+    padding: 10px 12px;
     border: 1px solid var(--color-blue, #90cdf4);
     border-radius: 8px;
     font-size: 1em;
     background: #f7fafc;
     transition: border-color 0.2s;
   }
+
   .registration-form input:focus {
     outline: none;
     border-color: var(--color-blue-dark, #205080);
   }
-  .delorian-upgrades-section {
-    grid-column: 1;
-    order: 1;
-    width: 100%;
-    box-sizing: border-box;
+
+  .delorean-hero-overlay {
+    min-width: 320px;
+    min-height: 260px;
+    font-size: calc(var(--font-size-overlay) * 1.1);
   }
-  .delorean-reviews-section {
-    grid-column: 2;
-    order: 2;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  /* Ensure each section takes up half the width */
-  .registration-button {
-    background: var(--color-blue-link, #143a6c);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 0;
-    font-size: 1.1em;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 8px;
-    transition:
-      background 0.2s,
-      box-shadow 0.2s;
-    box-shadow: 0 2px 8px rgba(32, 80, 128, 0.08);
-  }
-  /* ...existing code... */
-  .delorian-upgrades-grid {
+
+  .delorean-sections-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+    gap: 2rem;
+    margin: 40px 0;
+    align-items: start;
   }
+
+  .delorean-sections-container .registration-form input[type='text'],
   .delorian-upgrades-grid .registration-button:hover {
     background: var(--color-blue-dark, #205080);
   }
-  .flux-capacitor-card-outer,
-  .flame-decals-card-outer,
-  .bumper-stickers-card-outer,
-  .hub-caps-card-outer {
-    width: 100%;
-    max-width: 260px;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-  .flux-capacitor-card,
-  .flame-decals-card,
-  .bumper-stickers-card,
-  .hub-caps-card {
-    width: 100%;
-    min-width: 0;
-    max-width: 260px;
-    height: 120px;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-  .siteName {
-    font-size: calc(var(--font-size-xlarge) * 1.1);
-  }
-  #tools {
-    font-size: calc(var(--font-size-large) * 1.1);
-  }
 
-  /* Inventory Display - Laptop View */
-  #inv-display {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    margin: 32px 0;
-  }
+  border: 1px solid var(--color-blue, #90cdf4);
+  border-radius: 8px;
+  font-size: 1em;
+  background: #f7fafc;
+  transition: border-color 0.2s;
+}
 
-  .vehicle-card {
-    border-radius: 16px;
-  }
+.registration-form input:focus {
+  outline: none;
+  border-color: var(--color-blue-dark, #205080);
+}
 
-  .vehicle-card:hover {
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
-    transform: translateY(-6px);
-  }
+.delorian-upgrades-section {
+  grid-column: 1;
+  order: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
 
-  .vehicle-info {
-    padding: 28px;
-  }
+.delorean-reviews-section {
+  grid-column: 2;
+  order: 2;
+  width: 100%;
+  box-sizing: border-box;
+}
 
-  .vehicle-name {
-    font-size: 1.5rem;
-  }
+/* Ensure each section takes up half the width */
+.registration-button {
+  background: var(--color-blue-link, #143a6c);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(32, 80, 128, 0.08);
+}
 
-  .vehicle-price {
-    font-size: 1.625rem;
-  }
+/* ...existing code... */
+.delorian-upgrades-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
-  /* Legacy support */
-  #inv-display li {
-    padding: 24px;
-    transition:
-      transform 0.2s,
-      box-shadow 0.2s;
-  }
+.delorian-upgrades-grid .registration-button:hover {
+  background: var(--color-blue-dark, #205080);
+}
 
-  #inv-display li:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
+.flux-capacitor-card-outer,
+.flame-decals-card-outer,
+.bumper-stickers-card-outer,
+.hub-caps-card-outer {
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
 
-  .namePrice h2 {
-    font-size: calc(var(--font-size-large) * 1.2);
-  }
+.flux-capacitor-card,
+.flame-decals-card,
+.bumper-stickers-card,
+.hub-caps-card {
+  width: 100%;
+  min-width: 0;
+  max-width: 260px;
+  height: 120px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
 
-  .namePrice span {
-    font-size: calc(var(--font-size-large) * 1.2);
-  }
+.siteName {
+  font-size: calc(var(--font-size-xlarge) * 1.1);
+}
 
-  .notice {
-    padding: 24px;
-    margin: 32px 0;
-    font-size: calc(var(--font-size-base) * 1.2);
-  }
+#tools {
+  font-size: calc(var(--font-size-large) * 1.1);
+}
 
-  /* Item Detail Display - Laptop View */
-  #item-display {
-    flex-direction: row;
-    gap: 32px;
-    padding: 32px 0;
-  }
+/* Inventory Display - Laptop View */
+#inv-display {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin: 32px 0;
+}
 
-  .detail-container {
-    border-radius: 24px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  }
+.vehicle-card {
+  border-radius: 16px;
+}
 
-  .detail-info-section {
-    padding: 40px 36px;
-  }
+.vehicle-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  transform: translateY(-6px);
+}
 
-  .detail-header {
-    margin-bottom: 28px;
-    padding-bottom: 24px;
-  }
+.vehicle-info {
+  padding: 28px;
+}
 
-  .detail-title {
-    font-size: 2.25rem;
-  }
+.vehicle-name {
+  font-size: 1.5rem;
+}
 
-  .detail-price {
-    font-size: 2.5rem;
-  }
+.vehicle-price {
+  font-size: 1.625rem;
+}
 
-  .detail-description {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 36px;
-  }
+/* Legacy support */
+#inv-display li {
+  padding: 24px;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
 
-  .detail-specs {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
+#inv-display li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
 
-  .spec-item {
-    padding: 20px 24px;
-    transition: all 0.3s ease;
-  }
+.namePrice h2 {
+  font-size: calc(var(--font-size-large) * 1.2);
+}
 
-  .spec-item:hover {
-    background-color: #edf2f7;
-    transform: translateY(-2px);
-  }
+.namePrice span {
+  font-size: calc(var(--font-size-large) * 1.2);
+}
 
-  .spec-label {
-    font-size: 0.95rem;
-  }
+.notice {
+  padding: 24px;
+  margin: 32px 0;
+  font-size: calc(var(--font-size-base) * 1.2);
+}
 
-  .spec-value {
-    font-size: 1.15rem;
-  }
+/* Item Detail Display - Laptop View */
+#item-display {
+  flex-direction: row;
+  gap: 32px;
+  padding: 32px 0;
+}
 
-  /* Legacy support */
-  .item-image {
-    flex: 1;
-    max-width: 45%;
-  }
+.detail-container {
+  border-radius: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
 
-  .item-image img {
-    transition: transform 0.3s;
-  }
+.detail-info-section {
+  padding: 40px 36px;
+}
 
-  .item-image img:hover {
-    transform: scale(1.05);
-  }
+.detail-header {
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+}
 
-  .item-details {
-    flex: 1;
-    gap: 18px;
-  }
+.detail-title {
+  font-size: 2.25rem;
+}
 
-  .item-details h2 {
-    font-size: calc(var(--font-size-large) * 1.3);
-  }
+.detail-price {
+  font-size: 2.5rem;
+}
 
-  .item-price {
-    font-size: calc(var(--font-size-large) * 1.3);
-  }
+.detail-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
 
-  .item-description {
-    line-height: 1.8;
-  }
+.detail-specs {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
 
-  /* Error Page - Laptop */
-  .error-container {
-    padding: 80px 60px;
-  }
+.spec-item {
+  padding: 20px 24px;
+  transition: all 0.3s ease;
+}
 
-  .error-icon {
-    width: 120px;
-    height: 120px;
-  }
+.spec-item:hover {
+  background-color: #edf2f7;
+  transform: translateY(-2px);
+}
 
-  .error-title {
-    font-size: 3rem;
-  }
+.spec-label {
+  font-size: 0.95rem;
+}
 
-  .error-message {
-    font-size: 1.25rem;
-    max-width: 600px;
-  }
+.spec-value {
+  font-size: 1.15rem;
+}
 
-  .error-actions {
-    max-width: 450px;
-  }
+/* Legacy support */
+.item-image {
+  flex: 1;
+  max-width: 45%;
+}
 
-  .btn-primary,
-  .btn-secondary {
-    padding: 14px 32px;
-    font-size: 1.05rem;
-  }
+.item-image img {
+  transition: transform 0.3s;
+}
+
+.item-image img:hover {
+  transform: scale(1.05);
+}
+
+.item-details {
+  flex: 1;
+  gap: 18px;
+}
+
+.item-details h2 {
+  font-size: calc(var(--font-size-large) * 1.3);
+}
+
+.item-price {
+  font-size: calc(var(--font-size-large) * 1.3);
+}
+
+.item-description {
+  line-height: 1.8;
+}
+
+/* Error Page - Laptop */
+.error-container {
+  padding: 80px 60px;
+}
+
+.error-icon {
+  width: 120px;
+  height: 120px;
+}
+
+.error-title {
+  font-size: 3rem;
+}
+
+.error-message {
+  font-size: 1.25rem;
+  max-width: 600px;
+}
+
+.error-actions {
+  max-width: 450px;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 14px 32px;
+  font-size: 1.05rem;
 }
